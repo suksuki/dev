@@ -134,7 +134,7 @@
 			                            <div class="panel-heading">
 											<div class="panel-title">TODO</div>
 										</div>
-										<div id="chart"></div>
+										<div id="chart" class="bottom-right-bottom flex-100"></div>
 	                        		</td>
 	                        		<td class="center" style="width: 5%;">
 	                        		</td>
