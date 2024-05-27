@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="/static_resources/system/js/datatables/datatables.css">
 	<link rel="stylesheet" href="/static_resources/system/js/select2/select2-bootstrap.css">
 	<link rel="stylesheet" href="/static_resources/system/js/select2/select2.css">
-	<link rel="stylesheet" href="/static_resources/system/js/datatables/common2.css">
+	<link rel="stylesheet" href="/static_resources/system/js/datatables/prodcalc.css">
 	
 	<!-- Bilboard Chart(https://naver.github.io/billboard.js) -->
 	<script src="https://d3js.org/d3.v6.min.js"></script>
@@ -38,128 +38,119 @@
 		<br/>
 		
 		<div class="row">
-			<div id="vueapp">
+			<div id="vueapp" class="right flex-column flex-100">
 				<template>
-
-				<span class="top-content">
-					<div class="right-top">
-						<ul class="nav">
-                            <li class="nav-tab active">���� ����</li>
-                            <li class="nav-tab">�񵷸������� ����</li>
-                            <li class="nav-tab">���� ����</li>
-                            <li class="nav-tab">���� ����</li>
-						</ul>
-						<div class="column-group flex-column flex-gap-10">
-							<div class="form-group flex-gap-10" style="justify-content: left">
-								<label>*��ǰ����:</label>
-								<input class="form-control" id="prod_cd" placeholder="" v-model="info.prod_cd"/>
-								<input class="form-control" id="prod_nm" v-model="info.prod_nm" disabled />
-								<button type="button" class="btn" @click="popupProd()">
-									<i class="fa fa-search"></i>
-								</button>
-							</div>
-							<div class="form-group" style="justify-content: left">
-								<label>*�����ֱ�:</label>
-								<select class="flex-20" id="pay_ty_cd" v-model="info.pay_ty_cd">
-									<option value="1">opt 1</option>
-									<option value="2">opt 2</option>
-									<option value="3">opt</option>
-								</select>
-							</div>
-							<div class="form-group flex-gap-10" style="justify-content: left">
-								<label>���Աݾ� (��):</label>
-								<input type="number" placeholder="0.00" class="flex-10" id="circle_acml_amt" v-model="info.circle_acml_amt" />
-								<button type="button" class="btn btn-transparent flex-10" @click="setCircleAcmlAmt(10)">+10 btn</button>
-								<button type="button" class="btn btn-transparent flex-10" @click="setCircleAcmlAmt(50)">+50 btn</button>
-								<button type="button" class="btn btn-transparent flex-10" @click="setCircleAcmlAmt(100)">+100 btn</button>
-								<button type="button" class="btn btn-navy flex-10" @click="setCircleAcmlAmt(0)">����</button>
-							</div>
-							<div class="form-group flex-gap-10" style="justify-content: left">
-								<label>���ԱⰣ (����):</label>
-								<input class="flex-10" value="0" type="number" id="goal_prd" v-model="info.goal_prd" />
-								<button type="button" class="btn btn-transparent flex-10" @click="setGoalPrd(3)">+3 set</button>
-								<button type="button" class="btn btn-transparent flex-10" @click="setGoalPrd(6)">+6 set</button>
-								<button type="button" class="btn btn-transparent flex-10" @click="setGoalPrd(12)">+12 set</button>
-								<button type="button" class="btn btn-navy flex-10" @click="setGoalPrd(0)">����</button>
-							</div>
-							<div class="form-group flex-gap-10" style="justify-content: left">
-								<label>����ݸ� (%):</label>
-								<input class="form-control" type="text" id="aply_rate" v-model="info.aply_rate" />
-							</div>
-							<div class="form-group flex-gap-10" style="justify-content: left">
-								<label>���ڰ���:</label>
-								<select id="pay_ty_cd" type ="width:20%" v-model="info.pay_ty_cd">
-									<option value="1">opt 1</option>
-									<option value="2">opt 2</option>
-									<option value="3">opt 3</option>
-								</select>
-			                    <button type="button" class="btn btn-red" @click="prcCalc()">���ڰ��</button>
-							</div>
+				<div class="right-top flex-100">
+					<ul class="nav">
+						<li class="nav-tab active">nav 1</li>
+						<li class="nav-tab">nav 2</li>
+						<li class="nav-tab">nav 3</li>
+						<li class="nav-tab">nav 4</li>
+					</ul>
+					<div class="column-group flex-column flex-gap-10">
+						<div class="form-group flex-gap-10" style="justify-content: left">
+							<label class="width-100">search:</label>
+							<input class="width-100" id="prod_cd" value="1" v-model="info.prod_cd" disabled/>
+							<input class="width-100" id="prod_nm" value = "2" v-model="info.prod_nm" disabled/>
+							<button type="button" class="btn" @click="popupProd()">
+								<i class="fa fa-search"></i>
+							</button>
+						</div>
+						<div class="form-group" style="justify-content: left">
+							<label class="width-100">one:</label>
+							<select class="width-100" id="pay_ty_cd" v-model="info.pay_ty_cd">
+								<option value="1" selected>1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
+						</div>
+						<div class="form-group flex-gap-10" style="justify-content:left">
+							<label class="width-100">label 2:</label>
+							<input type="number" min="0" placeholder="10" class="width-100" id="circle_acml_amt" v-model="info.circle_acml_amt" />
+							<button type="button" class="btn btn-transparent flex-10" @click="setCircleAcmlAmt(10)">+10</button>
+							<button type="button" class="btn btn-transparent flex-10" @click="setCircleAcmlAmt(50)">+50</button>
+							<button type="button" class="btn btn-transparent flex-10" @click="setCircleAcmlAmt(100)">+100</button>
+							<button type="button" class="btn btn-navy flex-10" @click="setCircleAcmlAmt(0)">clear</button>
+						</div>
+						<div class="form-group flex-gap-10" style="justify-content: left">
+							<label class="width-100">label 3:</label>
+							<input class="width-100" value="3" min="0" type="number" id="goal_prd" v-model="info.goal_prd" />
+							<button type="button" class="btn btn-transparent flex-10" @click="setGoalPrd(3)">+3</button>
+							<button type="button" class="btn btn-transparent flex-10" @click="setGoalPrd(6)">+6</button>
+							<button type="button" class="btn btn-transparent flex-10" @click="setGoalPrd(12)">+12</button>
+							<button type="button" class="btn btn-navy flex-10" @click="setGoalPrd(0)">clear</button>
+						</div>
+						<div class="form-group flex-gap-10" style="justify-content: left">
+							<label class="width-100">label 4:</label>
+							<input class="width-100" type="number" id="aply_rate" value="3" placeholder="3" v-model="info.aply_rate" />
+						</div>
+						<div class="form-group flex-gap-10" style="justify-content: left;position: relative;">
+							<label class="width-100">label 6:</label>
+							<input type="date" value="2024-01-01" class="width-200" id="date" v-model="info.date" />
+							<button type="button" style="position:absolute;right: 0;bottom:10px;height: 50px;" class="btn btn-red" @click="prcCalc()">CALCULATE</button>
 						</div>
 					</div>
-				</span>
-
-			<ul class="nav">
-				<li class="nav-tab active">�����</li>
-			</ul>
-			<span class="bottom-content">
-					<span class="bottom-content-left">
-						<span class="flex flex-wrap flex-gap-10 data-display">
+				</div>
+				<div class="right-middle">
+					<ul class="nav">
+						<li class="nav-tab active">nav</li>
+					</ul>		
+				</div>
+				<div class="right-bottom flex-100 flex">
+					<div class="column-group  data-display ">
+						<div class="column-group flex-column flex-33 flex-gap-10" style="margin-bottom:30px ;" >
 							<div class="form-group">
-								<label>amt:</label>
+								<label class="width-100">amt:</label>
 								<input class="form-control" id="tot_dpst_amt" v-model="info.tot_dpst_amt" disabled />
 							</div>
-							<div class="form-group">
-								<label>dps_int:</label>
+							<div class="form-group gap">
+								<label class="width-100">dps_int:</label>
 								<input class="form-control" id="tot_dpst_int" v-model="info.tot_dpst_int" disabled />
 							</div>
 							<div class="form-group">
-								<label>rcv_amt:</label>
+								<label class="width-100">rcv_amt:</label>
 								<input class="form-control" id="bfo_rcve_amt" v-model="info.bfo_rcve_amt" disabled />
 							</div>
 							<div class="form-group">
-								<label>tax_amt:</label>
+								<label class="width-100">tax_amt:</label>
 								<input class="form-control" id="int_tax_amt" v-model="info.int_tax_amt" disabled />
 							</div>
 							<div class="form-group">
-								<label>rcv_amt:</label>
+								<label class="width-100">rcv_amt:</label>
 								<input class="form-control" id="atx_rcve_amt" v-model="info.atx_rcve_amt" disabled />
 							</div>
-						</span>	
-						<span class="chart-display" id="chart">
-						</span>
-					</span>
-					<span class="button-layout bottom-content-right">
-						<button type="button" class="btn btn-blue" @click="save()">top</button>
-						<button type="button" class="btn btn-blue" @click="save()">bottom</button>
-					</span>	
-				</span>
+			
+						</div>
+					</div>	
+					<div class="column-group flex-33">
+						<div style="top: -40px; right: 10px; position: absolute;">
+							<button type="button"  class="btn btn-blue" @click="save()">save</button>
+							<button type="button"  class="btn btn-blue" @click="save()">close</button>
+						</div>
+						<div style="border: 1px solid #CCCCCC;">
+							<table class="table table-bordered datatable dataTable" id="grid_app">
+								<thead>
+									<tr class="replace-inputs">
+										<th style="width: 10%;" class="center">one</th>
+										<th style="width: 23%;" class="center">two</th>
+										<th style="width: 23%;" class="center">three</th>
+										<th style="width: 21%;" class="center">four</th>
+										<th style="width: 23%;" class="center">five</th>
+									</tr>
+								</thead>
+								<tbody id="grid_tbody"></tbody>
+							</table>			
+	
+						</div>
+					</div>
+					<div class="flex-33">
+						<div class="chart-display" id="chart">
+						</div>
 
-				<div class="right-bottom flex-100">
-					<form class="form flex-column" method="POST" action="#">
-						<table>
-							<tr>
-								<td class="center" style="width: 60%; vertical-align: top;">
-									<table class="table table-bordered datatable dataTable" id="grid_app">
-										<thead>
-											<tr class="replace-inputs">
-												<th style="width: 10%;" class="center">ȸ��</th>
-												<th style="width: 23%;" class="center">���ӱݾ�</th>
-												<th style="width: 23%;" class="center">�Ѻ��Ա�</th>
-												<th style="width: 21%;" class="center">����������</th>
-												<th style="width: 23%;" class="center">�����ؿ�����</th>
-											</tr>
-										</thead>
-										<tbody id="grid_tbody">
-										</tbody>
-									</table>
-								</td>
-							</tr>
-						</table>
-					</form>
+					</div>
 				</div>
-            </div>
-		</template>
+			</div>
+			</template>
 			</div>
 		</div>
 		
