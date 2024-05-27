@@ -1,0 +1,128 @@
+.modal .modal-body .side-form {
+    border: 2px solid var(--gray-200);
+    background: var(--gray-100);
+    padding: var(--wrapper-padding);
+}  
+.modal .modal-body .side-form .form-group {
+    gap:10px;
+}  
+.input-number{
+    width: 40px;
+} 
+.input-date{
+    width: 200 px;
+} 
+
+.modal .modal-body .side-form >span{
+    padding: 3px;
+}
+
+/* Form */
+.form-group-right { display: flex; align-items:flex-end; justify-content:flex-end; width: 100%;}
+.form-group-right label { font-weight:bold; text-align: right; margin: auto 4px auto 0; }
+.form-group-right input { height: 18px; border: 1px solid var(--gray-200); padding: 4px 8px;}
+.form-group-right select { flex: 1; height: 30px; border: 1px solid var(--gray-200); padding: 4px; }
+
+.flex-23 {
+    width: 23%;
+}
+
+.modal .modal-body .table tbody td {
+    text-align: center;
+}
+
+.modal .modal-body .table thead th:nth-child(1),
+.modal .modal-body .table tbody td:nth-child(1) {
+    max-width: 8%
+}
+
+.modal .modal-body .table thead th:nth-child(2),
+.modal .modal-body .table tbody td:nth-child(2) {
+    max-width: 62%;
+}
+
+.modal .modal-body .table thead th:nth-child(3),
+.modal .modal-body .table tbody td:nth-child(3) {
+    max-width: 30%;
+}
+/* 隐藏默认的复选框样式 */
+input[type="checkbox"] {
+    visibility:hidden;
+  }
+  
+  /* 创建一个自定义的复选框样式 */
+  .checkbox-circle {
+    position:absolute;
+    display:inline-flex;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #000000;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  /* 当复选框被选中时，显示一个内部的圆圈 */
+  input[type="checkbox"]:checked + .checkbox-circle::after {
+    content: '';
+    position: absolute;
+    top: 0%;
+    left: 0px;
+    width: 16px;
+    height: 16px;
+    background:#000000;
+    border-radius: 50%;
+  }
+/***radio circle  **/
+input[type="radio"] {
+    visibility:hidden;
+  }
+/* 创建一个自定义的复选框样式 */
+ .radio-circle {
+    position:absolute;
+    display:inline-flex;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #000000;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  /* 当复选框被选中时，显示一个内部的圆圈 */
+  input[type="radio"]:checked + .radio-circle::after {
+    content: '';
+    position: absolute;
+    top: 0%;
+    left: 0px;
+    width: 16px;
+    height: 16px;
+    background:#000000;
+    border-radius: 50%;
+  }
+
+
+.modal.modal-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 210px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.modal.modal-popup.show {
+    display: block;
+}
+
+.modal.modal-popup .modal-body .form > div {
+    margin-bottom: var(--wrapper-padding);
+}
+
+.modal.modal-popup .modal-body .form .form-group label {
+    width: 80px;
+}
+
+.modal.modal-popup .modal-body .form .button {
+    gap: var(--default-flex-gap);
+}

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Reset CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet">
+    <!-- Google Noto Sans Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <!-- 공통 스타일 -->
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/sample.css" />
+    <title>Sample For CSS</title>
+</head>
+<body class="flex-center">
+    <main class="modal">
+        <div class="modal-header">
+            품정보관리 
+            <button class="btn btn-red close" >
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body flex-raw">
+            <form class="side-form flex-column flex-40">
+                <span>
+                    <label>상품명 : </label>
+                </span>
+                <span class="form-group">
+                    <input class="form-control" placeholder="우리사랑 행복 적금">
+                    </input>
+                </span>
+                <span class="form-group">
+                    <button class="btn btn-blue flex-50">조건 검색</button>
+                    <button class="btn btn-blue flex-50">전체 검색</button>
+                </span>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>판매상품명(상품코드)</th>
+                            <th>가입대상</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> 
+                                <label class="form-control flex-center">
+                                    <input type="radio" value="1" name="radio-group" checked="true"/>
+                                    <span class="radio-circle"></span>
+                                </label>
+                            </td>
+                            <td>우리사랑 행복 적금(A1200) </td>
+                            <td>일반개인</td>
+                        </tr>
+                        <tr>
+                            <td> 
+                                <label class="form-control flex-center">
+                                    <input type="radio" value="2" name="radio-group" />
+                                    <span class="radio-circle"></span>
+                                </label>
+                             </td>
+                             <td>우리사랑 행복 적금(A1200)</td>
+                            <td>18세이상 개인</td>
+                        </tr>
+                        <tr>
+                            <td> 
+                                <label class="form-control flex-center">
+                                    <input type="radio" value="3" name="radio-group" />
+                                    <span class="radio-circle"></span>
+                                </label>
+                             </td>
+                            <td>우리사랑 행복 적금(A1200) </td>
+                            <td>20~35세 청년</td>
+                          </tr>
+                        <tr>
+                            <td> 
+                                <label class="form-control flex-center">
+                                    <input type="radio" value="4" name="radio-group" />
+                                    <span class="radio-circle"></span>
+                                </label>
+                              </td>
+                             <td>우리사랑 행복 적금(A1200) </td>
+                            <td>일반개인</td>
+                         </tr>
+                        </tr>
+                        <tr>
+                            <td> 
+                                <label class="form-control flex-center">
+                                    <input type="radio" value="5" name="radio-group" />
+                                    <span class="radio-circle"></span>
+                                </label>
+                              </td>
+                             <td>우리사랑 행복 적금(A1200) </td>
+                            <td>일반개인</td>
+                        </tr>
+                        <tr>
+                            <td> 
+                                <label class="form-control flex-center">
+                                    <input type="radio" value="6" name="radio-group" />
+                                    <span class="radio-circle"></span>
+                                </label>
+                              </td>
+                             <td>우리사랑 행복 적금(A1200) </td>
+                            <td>일반개인</td>
+                        </tr>
+                        <tr>
+                            <td> 
+                                <label class="form-control flex-center">
+                                    <input type="radio" value="7" name="radio-group" />
+                                    <span class="radio-circle"></span>
+                                </label>
+                              </td>
+                             <td>우리사랑 행복 적금(A1200) </td>
+                            <td>20~35세미만</td>
+                        </tr>
+                    </tbody>
+                </table>
+    
+            </form>
+            <form class="side-form flex-column flex-50">
+                <span class="form-group">
+                    <label>*상품명 :</label>
+                    <input class="form-control" placeholder="우리사랑 행복적금">
+                    </input>
+                </span>
+                <span class="form-group">
+                    <label>*상품코드 :</label>
+                    <input class="form-control" placeholder="A1200">
+                    </input>
+                </span>
+                <span class="form-group">
+                    <label>*상품유형: </label>
+                    <input class="form-control" placeholder="적금">
+                    </input>
+                </span>
+                <span class="form-group">
+                    <label>*가입대상 : </label>
+                    <input class="form-control" placeholder="일반개인">
+                    </input>
+                </span>
+                <span class="form-group">
+                    <label>*가입(목표)기간: </label>
+                    <span class="form-control">
+                        <label>(최소)</label>
+                        <input class="input-number" type="number" value="6"></input>
+                        <label>개월 ~ (최대)</label>
+                        <input class="input-number" type="number" value="12"></input>
+                        <label>개월</label>
+                    </span>
+                </span>
+                <span class="form-group">
+                    <label>*가입(목표)금액 :</label>
+                    <span class="form-control">
+                        <input class="input-number" type="number" value="1"></input>
+                        <label>만원부터</label>
+                        <input class="input-number" type="number" value="100"></input>
+                        <label>만원까지</label>
+                    </span>
+                </span>
+                <span class="form-group">
+                    <label>납입주기 :</label>
+                    <input class="form-control" placeholder="월납">
+                    </input>
+                </span>
+                <span class="form-group">
+                    <label>*적용이율 :</label>
+                    <span class="form-control">
+                        <label>(최저)</label>
+                        <input class="input-number" type="number" value="3.00" step="0.01"></input>
+                        <label>% ~ (최대)</label>
+                        <input class="input-number" type="number" value="7.00" step="0.01"></input>
+                        <label>%</label>
+                    </span>
+                </span>
+                <span class="form-group">
+                    <label>*적용기간:</label>
+                    <span class="form-control">
+                        <input class="input-date" type="date" value="2024-01-12" ></input>
+                        <label>부터</label>
+                        <input class="input-date" type="date" value="2024-01-12"></input>
+                        <label>까지 </label>
+                    </span>
+                </span>
+                <span class="form-group">
+                    <label>*이자과세 :</label>
+                    <input class="form-control" placeholder="일반과세">
+                    </input>
+                </span>
+                <span class="form-group">
+                    <label>*판매상태 :</label>
+                    <input class="form-control" placeholder="0. 정상(판매) 1. 판매준비 2. 판매인가 9. 판매중지">
+                    </input>
+                </span>
+                <span class="form-group">
+                    <label>*판매기간: </label>
+                    <span class="form-control">
+                        <input class="input-date" type="date" value="2024-01-12" ></input>
+                        <label>부터</label>
+                        <input class="input-date" type="date" value="2024-01-12" "></input>
+                        <label>까지</label>
+                    </span>
+                </span>
+                <span class="form-group">
+                    <button class="btn btn-blue flex-20">등록</button>
+                    <button class="btn btn-blue flex-20">변경</button>
+                    <button class="btn btn-blue flex-20">삭제</button>
+                    <button class="btn btn-blue flex-20">신규</button>
+                </span>
+                <span class="form-group-right">
+                    <button class="btn btn-blue flex-23">종료</button>
+                </span>
+             </form>
+        </div>
+    </main>
+    <script>
+
+    </script>
+</body>
+</html>

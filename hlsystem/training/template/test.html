@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .bar {
+            fill: steelblue;
+        }
+        .bar:hover {
+            fill: orange;
+        }
+        .axis-label {
+            font: 10px sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- SVG容器 -->
+    <svg width="500" height="300">
+        <!-- 直方图的柱子 -->
+        <rect class="bar" x="10" y="50" width="50" height="200"></rect>
+        <rect class="bar" x="70" y="100" width="50" height="150"></rect>
+        <rect class="bar" x="130" y="150" width="50" height="100"></rect>
+        <!-- 坐标轴和标签 -->
+        <g class="axis-label">
+            <text x="25" y="270">1月</text>
+            <text x="85" y="270">2月</text>
+            <text x="145" y="270">3月</text>
+        </g>
+    </svg>
+</body>
+</html>
