@@ -5,21 +5,34 @@
 <head>
 	<jsp:include page="/WEB-INF/jsp/kcg/_include/system/header_meta.jsp" flush="false"/>
 	<!-- Imported styles on this page -->
-	<link rel="stylesheet" href="./css/datatables.css">
-	<link rel="stylesheet" href="./css/select2-bootstrap.css">
-	<link rel="stylesheet" href=".css/select2.css">
-	<link rel="stylesheet" href="./css/common1.css">
+	<link rel="stylesheet" href="/static_resources/system/js/datatables/datatables.css">
+	<link rel="stylesheet" href="/static_resources/system/js/select2/select2-bootstrap.css">
+	<link rel="stylesheet" href="/static_resources/system/js/select2/select2.css">
+	<link rel="stylesheet" href="/static_resources/system/js/datatables/common1.css">
 	
 	<title>상품정보관리</title>
 </head>
 <body class="page-body">
 
+<div class="page-container">
 
+	<jsp:include page="/WEB-INF/jsp/kcg/_include/system/sidebar-menu.jsp" flush="false"/>
 
 	<div class="main-content">
 
+		<jsp:include page="/WEB-INF/jsp/kcg/_include/system/header.jsp" flush="false"/>
+		
+		<ol class="breadcrumb bc-3">
+			<li><a href="#none" onclick="cf_movePage('/system')"><i class="fa fa-home"></i>Home</a></li>
+			<li class="active"><strong>상품정보관리</strong></li>
+		</ol>
+	
+		<h2>상품관리 > 상품정보관리</h2>
+		<br/>
+		
 		<div class="row">
 			<div id="vueapp" margin-left: 15px;">
+			<template>
 				<div class="panel panel-primary" data-collapsed="0">
 									
 					<div class="panel-body">
@@ -181,9 +194,16 @@
 					</form>
 					</div>
 				</div>
+			</template>
 			</div>
 		</div>
-    </div>
+		
+		<br />
+		
+		<jsp:include page="/WEB-INF/jsp/kcg/_include/system/footer.jsp" flush="false"/>
+		
+	</div>
+</div>
 </body>
 <script>
 
@@ -196,10 +216,13 @@ var vueapp = new Vue({
 		},
 	},
 	mounted : function(){
+		if(!cf_isEmpty(this.info.prod_cd)){
 			this.getInfo();
+		}
 	},
 	methods : {
 		getInfo : function(){
+			cf_ajax("/prod_mng/getInfo", this.info, this.getInfoCB);
 		},
 		getInfoCB : function(data){
 			this.info = data;
@@ -207,17 +230,23 @@ var vueapp = new Vue({
 		},
 		save : function(){
 			
+			if(!confirm("저장하시겠습니까?")) return;
 			
+			cf_ajax("/prod_mng/save", this.info, this.saveCB);
 		},
 		saveCB : function(data){
 			this.info.prod_cd = data.prod_cd;
 			this.getInfo();
 		},
 		delInfo : function(){
-			},
+			if(!confirm("삭제하시겠습니까?")) return;
+			cf_ajax("/prod_mng/delete", this.info, this.delInfoCB);
+		},
 		delInfoCB : function(data){
+			this.gotoList();
 		},
 		gotoList : function(){
+			cf_movePage('/prod_mng/list');
 		},
 	}
 });
