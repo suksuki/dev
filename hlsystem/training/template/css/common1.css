@@ -1,9 +1,9 @@
-/* °øÅë º¯¼ö */
+/* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 :root {
-    /* ¿©¹é */
+    /* ï¿½ï¿½ï¿½ï¿½ */
     --wrapper-padding: 10px;
     --default-flex-gap: 10px;
-    /* »ö»ó */
+    /* ï¿½ï¿½ï¿½ï¿½ */
     --white-100: rgb(255, 255, 255);
     --gray-100: rgb(240, 240, 240);
     --gray-200: rgb(212, 212, 212);
@@ -24,24 +24,23 @@
     --orange-100: rgb(233, 112, 52);
 }
 
-/* Àü¿ªÀû °øÅë ½ºÅ¸ÀÏ */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ */
 body {
     width: 100vw;
     height: 100vh;
-    background: var(--gray-300);
+    background: var(--white-100);
     font-family: "Noto Sans KR", sans-serif;
     font-optical-sizing: auto;
     font-weight: normal;
     font-style: normal;
 }
-
 .text-center { text-align: center; }
-
-/* Flex ½ºÅ¸ÀÏ */
-.flex { display: flex; }
-.flex-center { display: flex; align-items: center; justify-content: center; }
-.flex-column { display: flex; flex-direction: column; }
-.flex-wrap { flex-wrap: wrap; }
+/* Flex ï¿½ï¿½Å¸ï¿½ï¿½ */
+.flex {display: flex};
+.flex-right {justify-content: flex-end;};
+.flex-center { justify-items:  center; justify-content:space-between; }
+.flex-column { display: flex; flex-direction: column;}
+.flex-wrap { flex-wrap: wrap; border: 1px solid #999999; }
 .align-items-center { align-items: center; }
 .justify-content-center { justify-content: center; }
 .flex-10 { flex: 1 1 calc(10% - 6px); }
@@ -56,8 +55,9 @@ body {
 .flex-gap-4 { gap: 4px; }
 .flex-gap-10 { gap: 10px; }
 .flex-gap-20 { gap: 20px; }
-
-/* ¹öÆ° */
+.flex-padding-10 {padding: 10px;}
+.flex-margin-10 {margin: 10px;}
+/* ï¿½ï¿½Æ° */
 .btn { padding: 4px 12px; border: 1px solid var(--black-100); cursor: pointer; }
 .btn.btn-default { background: var(--white-100); color: var(--black-100); }
 .btn.btn-skyblue { background: var(--blue-500); color: var(--black-100); }
@@ -69,7 +69,7 @@ body {
 .btn.btn-transparent { background: transparent; color: var(--black-100); }
 .btn.btn-orange { background: var(--orange-100); color: var(--white-100); }
 
-/* »óÅÂ µ¿±×¶ó¹Ì ¾ÆÀÌÄÜ */
+/* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½×¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .status {
     display: flex;
     width: 18px;
@@ -82,20 +82,21 @@ body {
 .status.status-blue { background: var(--blue-100); }
 .status.status-green { background: var(--green-100); }
 .status.status-red { background: var(--red-200); }
-
+/*---*/
+.width-fix-100 {width:100px;}
 /* Form */
-.form-group { display: flex; align-items: center; justify-content: center; width: 100%; }
-.form-group label { font-weight: bold; text-align: right; margin: auto 4px auto 0; }
-.form-group input { height: 18px; border: 1px solid var(--gray-200); padding: 4px 8px; }
-.form-group select { flex: 1; height: 30px; border: 1px solid var(--gray-200); padding: 4px; }
+.form-group { display: flex; align-items: center; justify-content: center; width: 100%;}
+.form-group label { font-weight: bold; text-align: right;margin-right: 10px;}
+.form-group input { height: 30px; border: 1px solid var(--gray-200); margin-left:10px}
+.form-group select { flex: 1; height: 36px; border: 1px solid var(--gray-200);  }
 
 .form-control { flex: 1; width: 100%; }
 input.form-control[disabled] { background: var(--gray-100); }
 label.form-control { font-weight: bold; }
 textarea.form-control[disabled] { background: var(--gray-100); padding: 4px 8px; }
-select.form-control { height: 26px; }
+select.form-control { height: 36px; }
 
-/* ¸ð´Þ ÅÛÇÃ¸´ */
+/* ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¸ï¿½ */
 /* .modal { width: 874px; height: 585px; background: white; margin: auto; } */
 /* .modal-header { */
 /*     height: 24px; */
@@ -118,7 +119,7 @@ select.form-control { height: 26px; }
 /*     padding: var(--wrapper-padding); */
 /* } */
 
-/* ³×ºñ°ÔÀÌ¼Ç ÅÇ ÅÛÇÃ¸´ */
+/* ï¿½×ºï¿½ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¸ï¿½ */
 .nav { list-style: none; padding: 0; display: flex; }
 .nav .nav-tab {
     flex: 1;
@@ -134,7 +135,7 @@ select.form-control { height: 26px; }
 .nav .nav-tab:last-child { border-right: 1px solid var(--black-100); }
 .nav .nav-tab.active { background: var(--blue-400); color: var(--white-100); }
 
-/* ±ÝÀ¶°è»ê±â */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .left { margin-right: var(--wrapper-padding); }
 .left > label { font-weight: bold; margin-left: 34px; }
 .left .form-group label { width: 100px; }
