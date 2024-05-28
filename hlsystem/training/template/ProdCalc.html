@@ -20,7 +20,7 @@
 	<link rel="stylesheet" href="./css/billboard.css">
 	<!--jquery-->
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<!-- 凉뺝뀯 Bootstrap �쉪 CSS -->
+	<!-- 凉뺝??? Bootstrap �쉪 CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -51,16 +51,8 @@
 								<i class="fa fa-search"></i>
 							</button>
 						</div>
-						<div class="form-group" style="justify-content: left">
-							<label class="width-100">one:</label>
-							<select class="width-100" id="pay_ty_cd" v-model="info.pay_ty_cd">
-								<option value="1" selected>1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-							</select>
-						</div>
 						<div class="form-group flex-gap-10" style="justify-content:left">
-							<label class="width-100">label 2:</label>
+							<label class="width-100">equity money:</label>
 							<input type="number" min="0" placeholder="10" class="width-100" id="circle_acml_amt" v-model="info.circle_acml_amt" />
 							<button type="button" class="btn btn-transparent flex-10" @click="setCircleAcmlAmt(10)">+10</button>
 							<button type="button" class="btn btn-transparent flex-10" @click="setCircleAcmlAmt(50)">+50</button>
@@ -68,7 +60,7 @@
 							<button type="button" class="btn btn-navy flex-10" @click="setCircleAcmlAmt(0)">clear</button>
 						</div>
 						<div class="form-group flex-gap-10" style="justify-content: left">
-							<label class="width-100">label 3:</label>
+							<label class="width-100">month:</label>
 							<input class="width-100" value="3" min="0" type="number" id="goal_prd" v-model="info.goal_prd" />
 							<button type="button" class="btn btn-transparent flex-10" @click="setGoalPrd(3)">+3</button>
 							<button type="button" class="btn btn-transparent flex-10" @click="setGoalPrd(6)">+6</button>
@@ -76,12 +68,16 @@
 							<button type="button" class="btn btn-navy flex-10" @click="setGoalPrd(0)">clear</button>
 						</div>
 						<div class="form-group flex-gap-10" style="justify-content: left">
-							<label class="width-100">label 4:</label>
+							<label class="width-100">interest rate:</label>
 							<input class="width-100" type="number" id="aply_rate" value="3" placeholder="3" v-model="info.aply_rate" />
 						</div>
 						<div class="form-group flex-gap-10" style="justify-content: left;position: relative;">
-							<label class="width-100">label 6:</label>
-							<input type="date" value="2024-01-01" class="width-200" id="date" v-model="info.date" />
+							<label class="width-100">tax option:</label>
+							<select class="width-100" id="pay_ty_cd" v-model="info.pay_ty_cd">
+								<option value="1" selected>1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
 							<button type="button" style="position:absolute;right: 0;bottom:10px;height: 50px;" class="btn btn-red" @click="prcCalc()">CALCULATE</button>
 						</div>
 					</div>
@@ -101,10 +97,6 @@
 							<div class="form-group gap">
 								<label class="width-100">dps_int:</label>
 								<input class="form-control" id="tot_dpst_int" v-model="info.tot_dpst_int" disabled />
-							</div>
-							<div class="form-group">
-								<label class="width-100">rcv_amt:</label>
-								<input class="form-control" id="bfo_rcve_amt" v-model="info.bfo_rcve_amt" disabled />
 							</div>
 							<div class="form-group">
 								<label class="width-100">tax_amt:</label>
@@ -148,7 +140,7 @@
 		</div>						
 	</div>	
 	
-	<!-- 占싯억옙 -->
+	<!-- ?��?��?��?�� -->
 	<div class="modal fade" id="pop_code">
 		<template>
 			<div class="modal-dialog" style="width: 500px;">
@@ -240,17 +232,17 @@
 					$("#pop_code").modal("show");
 				},
 				prcCalc : function(){
-					var nRvcy		= this.info.pay_ty_cd; // �뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥�냲濚밸Ŧ�뵰占쎄뎡
-					var nPymAmt		= this.info.circle_acml_amt; // �뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥�끍�뼨����쐠�젆��먯삕占쎄뎡
-					var nRvpd		= this.info.goal_prd; // �뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥�끍�뼨轅명�쀨�뚳옙
-					var nApplItr	= this.info.aply_rate; // �뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥吏쀥뜝�럩援뀐옙�굛占쎄텓占쎌맶占쎈쐻�뜝占�
-					var nIntLvy		= this.info.pay_ty_cd; // �뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥�넃占쏙옙�벀�걠占쎄뎡�뜝�럥�맶�뜝�럥吏쀥뜝�럩援�
-					var nAmt1	= 0;	// �뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥�끋�뼨����쐠�젆��먯삕占쎄뎡
-					var nAmt2	= 0;	// �뜝�럥�맶�뜝�럥堉⑼옙�눀占쎈튂占쎄뎡�뜝�럥�맶�뜝�럥�끍濚밸Ŧ�뵰占쎄뎡
-					var nAmt3	= 0;	// �뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥�냻�뜝�럩�뮲�뜝�럩援꿨뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥吏쀥뜝�럩援�
-					var nInt	= 0;	// �뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥吏쀥뜝�럩援�
-					var nTotInt	= 0;	// �뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥吏쀥뜝�럩援�
-					var nTax	= 0;	// �뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥�넃占쏙옙�벀�걠占쎄뎡�뜝�럥�맶�뜝�럥吏쀥뜝�럩援�
+					var nRvcy		= this.info.pay_ty_cd; // �뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥�냲濚밸Ŧ�뵰?��?��?��
+					var nPymAmt		= this.info.circle_acml_amt; // �뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥�끍�뼨����?���젆���??��?��?��?��
+					var nRvpd		= this.info.goal_prd; // �뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥�끍�뼨轅명��?��?��?��
+					var nApplItr	= this.info.aply_rate; // �뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥吏�?�뜝�럩?��??�옙�굛?��?��?��?��?��맶占?��?���뜝?���?
+					var nIntLvy		= this.info.pay_ty_cd; // �뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥�넃?��?��?����??�걠?��?��?���뜝�럥�맶�뜝�럥吏�?�뜝�럩?���?
+					var nAmt1	= 0;	// �뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥�끋�뼨����?���젆���??��?��?��?��
+					var nAmt2	= 0;	// �뜝�럥�맶�뜝�럥?��?��?����???��?��?��?��?��?���뜝�럥�맶�뜝�럥�끍濚밸Ŧ�뵰?��?��?��
+					var nAmt3	= 0;	// �뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥�냻�뜝�럩��?��?���럩?��꿨뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥吏�?�뜝�럩?���?
+					var nInt	= 0;	// �뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥吏�?�뜝�럩?���?
+					var nTotInt	= 0;	// �뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥吏�?�뜝�럩?���?
+					var nTax	= 0;	// �뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥�넃?��?��?����??�걠?��?��?���뜝�럥�맶�뜝�럥吏�?�뜝�럩?���?
 					var html = '';
 					for(var i=1; i<=nRvpd; i++) {
 						
@@ -273,22 +265,22 @@
 						html += '<td class="right" style="text-align: right;">' + numberFormat(Math.round(nAmt3)) + '</td>';
 						html += '</tr>';
 					}
-					if(this.info.int_tax_ty_cd == "1") {		// �뜝�럥�맶�뜝�럥堉ｇ뛾�룇瑗듸옙占쏙옙�뜝�럩援꿨뜝�럥�맶�뜝�럥吏쀥뜝�럩援�
+					if(this.info.int_tax_ty_cd == "1") {		// �뜝�럥�맶�뜝�럥?��ｇ뛾�룇?��?��?��?��?��?���뜝�럩?��꿨뜝�럥�맶�뜝�럥吏�?�뜝�럩?���?
 						nTax = Math.round(nTotInt * 15.4 / 100);
-					} else if(this.info.int_tax_ty_cd == "2") {	// �뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥�넦�뜝�럩�뮲�뜝�럩援꿨뜝�럥�맶占쎈쐻�뜝占�
-						nTax = Math.round(nTotInt * 9.5 / 100);
-					}else {										// �뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥�맶占쎈쐻�뜝占�
+					} else if(this.info.int_tax_ty_cd == "2") {	// �뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥�넦�뜝�럩��?��?���럩?��꿨뜝�럥�맶?��?��?���뜝?���?
+						nTax = Math.round(nTotInt * 1.4 / 100);
+					}else {										// �뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�맶?��?��?���뜝?���?
 						nTax = 0;
 					}
 					nAmt3 = Math.round(nAmt3);
-					this.info.tot_dpst_amt = nAmt1;
+					this.info.tot_dpst_amt = nAmt2;
 					this.info.tot_dpst_int = nTotInt;
 					this.info.int_tax_amt = nTax;
 					this.info.bfo_rcve_amt = nAmt3;
 					this.info.atx_rcve_amt = nAmt3 - nTax;
 					$("#grid_tbody").html(html);
 					
-					// �뜝�럥�맶�뜝�럥吏쀥뜝�럩援꿨뜝�럥諭�
+					// �뜝�럥�맶�뜝�럥吏�?�뜝�럩?��꿨뜝�럥�?�?
 					var chart = bb.generate({
 						data: {
 							columns: [

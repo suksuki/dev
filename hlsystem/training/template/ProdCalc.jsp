@@ -184,7 +184,7 @@
 							<tr>
 								<th class="center" style="width: 15%;">��ǰ�ڵ�</th>
 								<th class="center" style="width: 55%;">��ǰ��</th>
-								<th class="center" style="width: 30%;">���Դ��</th>
+								<th class="center" style="width: 30%;">���Դ��?</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -238,7 +238,7 @@ var vueapp = new Vue({
 			cf_ajax("/prod_calc/save", this.info, this.saveCB);
 		},
 		saveCB : function(data){
-			alert("����Ǿ����ϴ�.");
+			alert("����Ǿ����ϴ�?.");
 		},
 		setCircleAcmlAmt : function(nAmt){
 			if(nAmt == 0) {
@@ -262,7 +262,7 @@ var vueapp = new Vue({
 			var nRvcy		= this.info.pay_ty_cd; // �����ֱ�
 			var nPymAmt		= this.info.circle_acml_amt; // ���Աݾ�
 			var nRvpd		= this.info.goal_prd; // ���ԱⰣ
-			var nApplItr	= this.info.aply_rate; // ����ݸ�
+			var nApplItr	= this.info.aply_rate; // ����ݸ�?
 			var nIntLvy		= this.info.pay_ty_cd; // ���ڰ���
 			
 			var nAmt1	= 0;	// ���ӱݾ�
@@ -299,14 +299,14 @@ var vueapp = new Vue({
 			
 			if(this.info.int_tax_ty_cd == "1") {		// �Ϲݰ���
 				nTax = Math.round(nTotInt * 15.4 / 100);
-			} else if(this.info.int_tax_ty_cd == "2") {	// ���ݿ��
+			} else if(this.info.int_tax_ty_cd == "2") {	// ���ݿ��?
 				nTax = Math.round(nTotInt * 9.5 / 100);
-			}else {										// �����
+			}else {										// �����?
 				nTax = 0;
 			}
 			nAmt3 = Math.round(nAmt3);
 			
-			this.info.tot_dpst_amt = nAmt1;
+			this.info.tot_dpst_amt = nAmt2;
 			this.info.tot_dpst_int = nTotInt;
 			this.info.int_tax_amt = nTax;
 			this.info.bfo_rcve_amt = nAmt3;
@@ -370,7 +370,7 @@ var pop_code = new Vue({
 </script>
 
 <script>
-    // Nav �� Ŭ�� �̺�Ʈ ���
+    // Nav �� Ŭ�� �̺�Ʈ ���?
     document.querySelector('.right-top .nav').addEventListener('click', (e) => {
     	e.target.closest('.nav').querySelectorAll('.nav-tab').forEach((elem) => {
             elem.classList.remove('active');
