@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="/static_resources/system/js/datatables/datatables.css">
 	<link rel="stylesheet" href="/static_resources/system/js/select2/select2-bootstrap.css">
 	<link rel="stylesheet" href="/static_resources/system/js/select2/select2.css">
-	<link rel="stylesheet" href="/static_resources/system/js/datatables/common1.css">
+	<link rel="stylesheet" href="/static_resources/system/js/datatables/proddtl.css">
 	
 	<title>상품정보관리</title>
 </head>
@@ -31,170 +31,145 @@
 		<br/>
 		
 		<div class="row">
-			<div id="vueapp" margin-left: 15px;">
+			<div id="vueapp" style="display: flex;justify-items: center;" >
 			<template>
-				<div class="panel panel-primary" data-collapsed="0">
-									
-					<div class="panel-body">
+				<div class="panel-body" style="border: 1px solid #FF0000;width: 100%;">			
+					<div class="left-panel flex-66">
+						<div class="form-group">
+							<label for="prod_nm" class="fix-width-33">상품명:</label>
+							<input type="text" class="form-control" id="prod_nm" v-model="info.prod_nm">
+						</div>
+						<div class="form-group">
+							<label for="prod_cd" class="fix-width-33">상품코드:</label>
+							<input type="text" class="form-control" id="prod_cd" v-model="info.prod_cd">
+						</div>
+						<div class="form-group">
+							<label for="prod_ty_cd" class="fix-width-33">상품유형:</label>
+							<select class="form-control" id="prod_ty_cd" v-model="info.prod_ty_cd">
+								<option value="1">예금</option>
+								<option value="2">적금</option>
+							</select>
+						</div>
 			
-					<form class="form-horizontal">
-						<table style="border: 0px;">
-							<tr>
-								<td style="width: 50%">
-									<div class="form-group">
-										<label for="prod_nm" class="sys_label_01 control-label">상품명</label>
-										<div class="sys_col_03">
-											<input type="text" class="form-control" id="prod_nm" v-model="info.prod_nm">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="prod_cd" class="sys_label_01 control-label">상품코드</label>
-										<div class="sys_col_03">
-											<input type="text" class="form-control" id="prod_cd" v-model="info.prod_cd">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="prod_ty_cd" class="sys_label_01 control-label">상품유형</label>
-										<div class="sys_col_03">
-											<select class="form-control" id="prod_ty_cd" v-model="info.prod_ty_cd">
-												<option value="1">예금</option>
-												<option value="2">적금</option>
-											</select>
-										</div>
-									</div>
+						<div class="form-group">
+							<label for="sbstg_ty_cd" class="fix-width-33">가입대상:</label>
+							<select class="form-control" id="sbstg_ty_cd" v-model="info.sbstg_ty_cd">
+								<option value="1">일반개인</option>
+								<option value="2">청년생활지원</option>
+								<option value="3">장애자우선지원</option>
+							</select>
+						</div>
 						
-									<div class="form-group">
-										<label for="sbstg_ty_cd" class="sys_label_01 control-label">가입대상</label>
-										<div class="sys_col_03">
-											<select class="form-control" id="sbstg_ty_cd" v-model="info.sbstg_ty_cd">
-												<option value="1">일반개인</option>
-												<option value="2">청년생활지원</option>
-												<option value="3">장애자우선지원</option>
-											</select>
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label for="ntsl_amt_min" class="sys_label_01 control-label">가입금액(최소)</label>
-										<div class="sys_col_03">
-											<input type="text" class="form-control" id="ntsl_amt_min" v-model="info.ntsl_amt_min">
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label for="ntsl_amt_max" class="sys_label_01 control-label">가입금액(최대)</label>
-										<div class="sys_col_03">
-											<input type="text" class="form-control" id="ntsl_amt_max" v-model="info.ntsl_amt_max">
-										</div>
-									</div>
-					
-									<div class="form-group">
-										<label for="prod_ty_cd" class="sys_label_01 control-label">납입주기</label>
-										<div class="sys_col_03">
-											<select class="form-control" id="pay_ty_cd" v-model="info.pay_ty_cd">
-												<option value="1">월납</option>
-												<option value="2">년납</option>
-												<option value="3">일시납</option>
-											</select>
-										</div>
-									</div>		
+						<div class="form-group">
+							<label for="ntsl_amt_min" class="fix-width-33">가입금액:</label>
+							<div class="form-control">
+								<label>(최소)</label>
+								<input type="text"  id="ntsl_amt_min" v-model="info.ntsl_amt_min">
+								<label>(최소) ~ (최대)</label>
+								<input type="text"  id="ntsl_amt_max" v-model="info.ntsl_amt_max">
+								<label>최소</label>
+							</div>
+						</div>
 						
-									<div class="form-group">
-										<label for="prod_air_min" class="sys_label_01 control-label">적용이율(최저)</label>
-										<div class="sys_col_03">
-											<input type="text" class="form-control" id="prod_air_min" v-model="info.prod_air_min">
-										</div>
-									</div>				
+						<div class="form-group">
+							<label for="ntsl_amt_max" class="fix-width-33">가입금액:</label>
+							<div class="form-control">
+								<input type="text"  id="ntsl_amt_min" v-model="info.ntsl_amt_min">
+								<label>(최소) ~ (최대)</label>
+								<input type="text"  id="ntsl_amt_max" v-model="info.ntsl_amt_max">
+								<label>최소</label>
+							</div>
+						</div>
+		
+						<div class="form-group">
+							<label for="prod_ty_cd" class="fix-width-33">납입주기:</label>
+							<select class="form-control" id="pay_ty_cd" v-model="info.pay_ty_cd">
+								<option value="1">월납</option>
+								<option value="2">년납</option>
+								<option value="3">일시납</option>
+							</select>
+						</div>		
 			
-									<div class="form-group">
-										<label for="prod_air_max" class="sys_label_01 control-label">적용이율(최대)</label>
-										<div class="sys_col_03">
-											<input type="text" class="form-control" id="prod_air_max" v-model="info.prod_air_max">
-										</div>
-									</div>	
-			
-									<div class="form-group">
-										<label for="prod_air_bgng_ymd" class="sys_label_01 control-label">적용기간(시작)</label>
-										<div class="sys_col_03">
-											<input type="text" class="form-control" id="prod_air_bgng_ymd" v-model="info.prod_air_bgng_ymd">
-										</div>
-									</div>
-			
-									<div class="form-group">
-										<label for="prod_air_end_ymd" class="sys_label_01 control-label">적용기간(종료)</label>
-										<div class="sys_col_03">
-											<input type="text" class="form-control" id="prod_air_end_ymd" v-model="info.prod_air_end_ymd">
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label for="int_tax_ty_cd_nm" class="sys_label_01 control-label">이자과세구분</label>
-										<div class="sys_col_03">
-											<select class="form-control" id="int_tax_ty_cd" v-model="info.int_tax_ty_cd">
-												<option value="1">일반과세</option>
-												<option value="2">세금우대</option>
-												<option value="3">비과세</option>
-											</select>
-										</div>
-									</div>						
-									
-									<div class="form-group">
-										<label for="curr_stcd" class="sys_label_01 control-label">판매상태</label>
-										<div class="sys_col_03">
-											<select class="form-control" id="curr_stcd" v-model="info.curr_stcd">
-												<option value="0">정상(판매)</option>
-												<option value="1">판매준비</option>
-												<option value="2">판매인가</option>
-												<option value="3">판매중지</option>
-											</select>
-										</div>
-									</div>						
-									
-									<div class="form-group">
-										<label for="ntsl_bgng_ymd" class="sys_label_01 control-label">팜매기간(시작)</label>
-										<div class="sys_col_03">
-											<input type="text" class="form-control" id="ntsl_bgng_ymd" v-model="info.ntsl_bgng_ymd">
-										</div>
-									</div>
-			
-									<div class="form-group">
-										<label for="ntsl_end_ymd" class="sys_label_01 control-label">팜매기간(종료)</label>
-										<div class="sys_col_03">
-											<input type="text" class="form-control" id="ntsl_end_ymd" v-model="info.ntsl_end_ymd">
-										</div>
-									</div>
-												
-									<div class="form-group">
-										<div class="col-sm-offset-2 col-sm-6">
-											<button type="button" class="btn btn-green btn-icon btn-small" @click="save">
-												저장
-												<i class="entypo-check"></i>
-											</button>
-											<button type="button" id="btn_delete" class="btn btn-red btn-icon btn-small" @click="delInfo">
-												삭제
-												<i class="entypo-trash"></i>
-											</button>
-											<button type="button" class="btn btn-blue btn-icon btn-small" @click="gotoList">
-												목록
-												<i class="entypo-list"></i>
-											</button>
-										</div>
-									</div>
-								</td>
-								<td style="width: 50%;">
-									<div class="panel panel-primary" style="width: 100%; height: 100%; margin-left: 20px;">
-										<div>
-											<label>이율변동내역</label>
-											<textarea type="text" style="width:100%;font-size:13px; border:3px;" rows="37" cols="33"  id="field_contents" ></textarea>
-										</div>
-									</div>
-								</td>
-							</tr>
-						</table>
-					</form>
+						<div class="form-group">
+							<label for="prod_air_min" class="fix-width-33">적용이율(최저):</label>
+							<input type="text" class="form-control" id="prod_air_min" v-model="info.prod_air_min">
+						</div>				
+		
+						<div class="form-group">
+							<label for="prod_air_max" class="fix-width-33">적용이율(최대):</label>
+							<div class="form-control">
+								<label>(최소)</label>
+								<input type="text" id="prod_air_min" v-model="info.prod_air_min">
+								<label>%  ~ (최대)</label>
+								<input type="text"  id="prod_air_max" v-model="info.prod_air_max">
+								<label>%</label>
+							</div>
+						</div>
+		
+						<div class="form-group">
+							<label for="prod_air_bgng_ymd" class="fix-width-33">적용기간:</label>
+							<div class="form-control">
+								<input type="date"  id="prod_air_bgng_ymd" v-model="info.prod_air_bgng_ymd">
+								<label>To</label>
+								<input type="date"  id="prod_air_end_ymd" v-model="info.prod_air_end_ymd">
+								<label>End</label>
+							</div>
+						</div>
+		
+						<div class="form-group">
+							<label for="int_tax_ty_cd_nm" class="fix-width-33">이자과세구분:</label>
+							<select class="form-control" id="int_tax_ty_cd" v-model="info.int_tax_ty_cd">
+								<option value="1">일반과세</option>
+								<option value="2">세금우대</option>
+								<option value="3">비과세</option>
+							</select>
+						</div>						
+						
+						<div class="form-group">
+							<label for="curr_stcd" class="fix-width-33">판매상태:</label>
+							<select class="form-control" id="curr_stcd" v-model="info.curr_stcd">
+								<option value="0">정상(판매)</option>
+								<option value="1">판매준비</option>
+								<option value="2">판매인가</option>
+								<option value="3">판매중지</option>
+							</select>
+						</div>						
+		
+						<div class="form-group">
+							<label for="ntsl_bgng_ymd" class="fix-width-33">팜매기간(시작:</label>
+							<div class="form-control">
+								<input type="date"  id="ntsl_bgng_ymd" v-model="info.ntsl_bgng_ymd">
+								<label>To</label>
+								<input type="date"  id="ntsl_end_ymd" v-model="info.ntsl_end_ymd">
+								<label>End</label>
+							</div>
+						</div>
+						
+		
+						<div class="form-group">
+							<div class="">
+								<button type="button" class="btn btn-green btn-icon btn-small" @click="save">
+									저장
+									<i class="entypo-check"></i>
+								</button>
+								<button type="button" id="btn_delete" class="btn btn-red btn-icon btn-small" @click="delInfo">
+									삭제
+									<i class="entypo-trash"></i>
+								</button>
+								<button type="button" class="btn btn-blue btn-icon btn-small" @click="gotoList">
+									목록
+									<i class="entypo-list"></i>
+								</button>
+							</div>
+						</div>
 					</div>
-				</div>
-			</template>
+					<div class="right-panel flex-33">
+						<label>이율변동내역</label>
+						<textarea type="text" style="width:100%;font-size:13px; border:1px;" rows="37" cols="33"  id="field_contents" ></textarea>
+					</div>
+			</div>						
+			</template>		
+
 			</div>
 		</div>
 		
