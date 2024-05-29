@@ -17,7 +17,7 @@
 	<script src="/static_resources/system/js/datatables/billboard.js"></script>
 	<link rel="stylesheet" href="/static_resources/system/js/datatables/billboard.css">
 	
-	<title>��������</title> 
+	<title>占쏙옙占쏙옙占쏙옙占쏙옙</title> 
 </head>
 <body class="page-body">
 
@@ -31,10 +31,10 @@
 		
 		<ol class="breadcrumb bc-3">
 			<li><a href="#none" onclick="cf_movePage('/system')"><i class="fa fa-home"></i>Home</a></li>
-			<li class="active"><strong>��������</strong></li>
+			<li class="active"><strong>占쏙옙占쏙옙占쏙옙占쏙옙</strong></li>
 		</ol>
 	
-		<h2>��ǰ���� > ��������</h2>
+		<h2>占쏙옙품占쏙옙占쏙옙 > 占쏙옙占쏙옙占쏙옙占쏙옙</h2>
 		<br/>
 		
 		<div class="row">
@@ -56,14 +56,6 @@
 								<i class="fa fa-search"></i>
 							</button>
 						</div>
-						<div class="form-group" style="justify-content: left">
-							<label class="width-100">one:</label>
-							<select class="width-100" id="pay_ty_cd" v-model="info.pay_ty_cd">
-								<option value="1" selected>1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-							</select>
-						</div>
 						<div class="form-group flex-gap-10" style="justify-content:left">
 							<label class="width-100">label 2:</label>
 							<input type="number" min="0" placeholder="10" class="width-100" id="circle_acml_amt" v-model="info.circle_acml_amt" />
@@ -73,7 +65,7 @@
 							<button type="button" class="btn btn-navy flex-10" @click="setCircleAcmlAmt(0)">clear</button>
 						</div>
 						<div class="form-group flex-gap-10" style="justify-content: left">
-							<label class="width-100">label 3:</label>
+							<label class="width-100">month:</label>
 							<input class="width-100" value="3" min="0" type="number" id="goal_prd" v-model="info.goal_prd" />
 							<button type="button" class="btn btn-transparent flex-10" @click="setGoalPrd(3)">+3</button>
 							<button type="button" class="btn btn-transparent flex-10" @click="setGoalPrd(6)">+6</button>
@@ -81,12 +73,21 @@
 							<button type="button" class="btn btn-navy flex-10" @click="setGoalPrd(0)">clear</button>
 						</div>
 						<div class="form-group flex-gap-10" style="justify-content: left">
-							<label class="width-100">label 4:</label>
-							<input class="width-100" type="number" id="aply_rate" value="3" placeholder="3" v-model="info.aply_rate" />
+							<label class="width-100">interest rate:</label>
+							<input class="width-100" type="number" id="aply_rate" value="3" placeholder="0.035"  min ="0"v-model="info.aply_rate" />
 						</div>
+						<div class="form-group" style="justify-content: left">
+							<label class="width-100">tax option:</label>
+							<select class="width-100" id="pay_ty_cd" v-model="info.pay_ty_cd">
+								<option value="1" selected>1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
+						</div>
+						
 						<div class="form-group flex-gap-10" style="justify-content: left;position: relative;">
-							<label class="width-100">label 6:</label>
-							<input type="date" value="2024-01-01" class="width-200" id="date" v-model="info.date" />
+							<label class="width-100">today:</label>
+							<input type="date" value="2024-01-01" class="width-200" id="date" v-model="info.date" disabled />
 							<button type="button" style="position:absolute;right: 0;bottom:10px;height: 50px;" class="btn btn-red" @click="prcCalc()">CALCULATE</button>
 						</div>
 					</div>
@@ -106,10 +107,6 @@
 							<div class="form-group gap">
 								<label class="width-100">dps_int:</label>
 								<input class="form-control" id="tot_dpst_int" v-model="info.tot_dpst_int" disabled />
-							</div>
-							<div class="form-group">
-								<label class="width-100">rcv_amt:</label>
-								<input class="form-control" id="bfo_rcve_amt" v-model="info.bfo_rcve_amt" disabled />
 							</div>
 							<div class="form-group">
 								<label class="width-100">tax_amt:</label>
@@ -161,7 +158,7 @@
 	</div>
 </div>
 
-<!-- �˾� -->
+<!-- 占싯억옙 -->
 <div class="modal fade" id="pop_code">
 <template>
 	<div class="modal-dialog" style="width: 500px;">
@@ -173,7 +170,7 @@
 							<input type="search" id="prod_cd" style="width: 100px;" v-model="prod_cd">
 							<input type="search" id="prod_nm" style="width: 250px;" v-model="prod_nm">
 							<button type="button" class="btn btn-red" style="margin-left: 5px;" @click="getList">
-								�˻�
+								占싯삼옙
 							</button>
 						</div>
 					</div>
@@ -182,9 +179,9 @@
 					<table class="table table-bordered datatable dataTable">
 						<thead style="position: sticky;top: 0px;">
 							<tr>
-								<th class="center" style="width: 15%;">��ǰ�ڵ�</th>
-								<th class="center" style="width: 55%;">��ǰ��</th>
-								<th class="center" style="width: 30%;">���Դ��?</th>
+								<th class="center" style="width: 15%;">占쏙옙품占쌘듸옙</th>
+								<th class="center" style="width: 55%;">占쏙옙품占쏙옙</th>
+								<th class="center" style="width: 30%;">占쏙옙占쌉댐옙占�</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -233,12 +230,12 @@ var vueapp = new Vue({
 		},
 		save : function(){
 			
-			if(!confirm("�����Ͻðڽ��ϱ�?")) return;
+			if(!confirm("占쏙옙占쏙옙占싹시겠쏙옙占싹깍옙?")) return;
 			
 			cf_ajax("/prod_calc/save", this.info, this.saveCB);
 		},
 		saveCB : function(data){
-			alert("����Ǿ����ϴ�?.");
+			alert("占쏙옙占쏙옙퓸占쏙옙占쏙옙求占�.");
 		},
 		setCircleAcmlAmt : function(nAmt){
 			if(nAmt == 0) {
@@ -259,29 +256,23 @@ var vueapp = new Vue({
 		},
 		prcCalc : function(){
 			
-			var nRvcy		= this.info.pay_ty_cd; // �����ֱ�
-			var nPymAmt		= this.info.circle_acml_amt; // ���Աݾ�
-			var nRvpd		= this.info.goal_prd; // ���ԱⰣ
-			var nApplItr	= this.info.aply_rate; // ����ݸ�?
-			var nIntLvy		= this.info.pay_ty_cd; // ���ڰ���
+			var nRvcy		= this.info.pay_ty_cd; // 占쏙옙占쏙옙占쌍깍옙
+			var nPymAmt		= this.info.circle_acml_amt; // 占쏙옙占쌉금억옙
+			var nRvpd		= this.info.goal_prd; // 占쏙옙占쌉기간
+			var nApplItr	= this.info.aply_rate; // 占쏙옙占쏙옙賻占�
+			var nIntLvy		= this.info.pay_ty_cd; // 占쏙옙占쌘곤옙占쏙옙
 			
-			var nAmt1	= 0;	// ���ӱݾ�
-			var nAmt2	= 0;	// �Ѻ��Ա�
-			var nAmt3	= 0;	// �����ؿ�����
-			var nInt	= 0;	// ����������
-			var nTotInt	= 0;	// ��������
-			var nTax	= 0;	// ���ڰ���
+			var nAmt1	= 0;	// 占쏙옙占쌈금억옙
+			var nAmt2	= 0;	// 占싼븝옙占쌉깍옙
+			var nAmt3	= 0;	// 占쏙옙占쏙옙占쌔울옙占쏙옙占쏙옙
+			var nInt	= 0;	// 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
+			var nTotInt	= 0;	// 占쏙옙占쏙옙占쏙옙占쏙옙
+			var nTax	= 0;	// 占쏙옙占쌘곤옙占쏙옙
 			
 			var html = '';
 			for(var i=1; i<=nRvpd; i++) {
 				
-				if(nRvcy == 1) {
-					nAmt1 = nPymAmt;
-				} else if(i % nRvcy == 1) {
-					nAmt1 = nPymAmt * nRvcy;
-				} else {
-					nAmt = 0;
-				}
+				nAmt1 = nPymAmt;
 				
 				nAmt2 += nAmt1;
 				nInt = nAmt2 * (nApplItr / 12 / 100);
@@ -297,11 +288,11 @@ var vueapp = new Vue({
 				html += '</tr>';
 			}
 			
-			if(this.info.int_tax_ty_cd == "1") {		// �Ϲݰ���
+			if(this.info.pay_ty_cd == "1") {		// 占싹반곤옙占쏙옙
 				nTax = Math.round(nTotInt * 15.4 / 100);
-			} else if(this.info.int_tax_ty_cd == "2") {	// ���ݿ��?
-				nTax = Math.round(nTotInt * 9.5 / 100);
-			}else {										// �����?
+			} else if(this.info.pay_ty_cd == "2") {	// 占쏙옙占쌥울옙占�
+				nTax = Math.round(nTotInt * 1.4 / 100);
+			}else {										// 占쏙옙占쏙옙占�
 				nTax = 0;
 			}
 			nAmt3 = Math.round(nAmt3);
@@ -313,15 +304,14 @@ var vueapp = new Vue({
 			this.info.atx_rcve_amt = nAmt3 - nTax;
 			$("#grid_tbody").html(html);
 			
-			// ��Ʈ
+			// 占쏙옙트
 			var chart = bb.generate({
                 data: {
                     columns: [
-                        ["�����հ�"	, nAmt2],
-                        ["��������"	, nTotInt],
-                        ["�������ɾ�"	, nAmt3],
-                        ["���ڰ���"	, nTax],
-                        ["���ļ��ɾ�"	, nAmt3 - nTax],
+                        ["占쏙옙占쏙옙占쌌곤옙"	, nAmt2],
+                        ["占쏙옙占쏙옙占쏙옙占심억옙"	, nTotInt],
+                        ["占쏙옙占쌘곤옙占쏙옙"	, nTax],
+                        ["占쏙옙占식쇽옙占심억옙"	, nAmt3 - nTax],
                     ],
                     type: "bar",
                     groups: [
@@ -370,7 +360,7 @@ var pop_code = new Vue({
 </script>
 
 <script>
-    // Nav �� Ŭ�� �̺�Ʈ ���?
+    // Nav 占쏙옙 클占쏙옙 占싱븝옙트 占쏙옙占�
     document.querySelector('.right-top .nav').addEventListener('click', (e) => {
     	e.target.closest('.nav').querySelectorAll('.nav-tab').forEach((elem) => {
             elem.classList.remove('active');
