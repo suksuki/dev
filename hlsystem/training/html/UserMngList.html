@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Reset CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet">
+        <!-- Google Noto Sans Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+        <!-- Fontawesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <!-- vue version 2-->
+        <script src="https://unpkg.com/vue@2"></script>	
+    
+        <!-- Bilboard Chart(https://naver.github.io/billboard.js) -->
+        <script src="https://d3js.org/d3.v6.min.js"></script>
+        <script src="./js/billboard.js"></script>
+        <link rel="stylesheet" href="./css/billboard.css">
+        <!--jquery-->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- 畑밸틶��� Bootstrap 占쎌돦 CSS 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+        -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+            <!-- Imported styles on this page -->
+        <link rel="stylesheet" href="./css/datatables.css">
+        <link rel="stylesheet" href="./css/prodlist.css">
+        
+        <title>상품정보관리</title>
+    </head>
+
+<body class="page-body">
+
+<div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+
+    
+    <div class="flex-column" id="vueapp">
+
+        <div class="form-group-right flex-padding-10 flex-100" style="position: relative;">
+            <div style="position: absolute;left: 10px;bottom: 2px;">
+                <button type="button" class="btn btn-orange btn-icon icon-left btn-small" @click="gotoDtl()">
+                    추가<i class="entypo-plus"></i>
+                </button>
+                <button type="button" class="btn btn-primary btn-icon icon-left btn-small" @click="excelDn">
+                    EXCEL<i class="entypo-download"></i>
+                </button>
+    
+            </div>
+            <div>
+                <select id="search_nm" v-model="search_nm">
+                    <option value="name">사용자명</option>
+                    <option value="user_id">아이디</option>
+                </select>	
+                <input type="search" placeholder="" style="width: 120px;" v-model="search_val" @keyup.enter="getList(true)">
+                <button type="button" class="btn btn-blue btn-icon icon-left" style="margin-left: 5px;" @click="getList(true)">
+                    검색
+                    <i class="entypo-search"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        
+        <table class="table table-bordered datatable dataTable">
+            <thead>
+                <tr class="replace-inputs">
+                    <th style="width: 5%;" class="center">번호</th>
+                    <th style="width: 18%;" class="center sorting" @click="sortList(event.target)" sort_target="name">사용자명</th>
+                    <th style="width: 23%;" class="center sorting" @click="sortList(event.target)" sort_target="jikgub_nm">직책</th>
+                    <th style="width: 18%;" class="center sorting" @click="sortList(event.target)" sort_target="user_id">아이디</th>
+                    <th style="width: 8%;" class="center sorting" @click="sortList(event.target)" sort_target="statusnm">현재상태</th>
+                    <th style="width: 18%;" class="center sorting" @click="sortList(event.target)" sort_target="auth_nm">권한</th>
+                    <th style="width: 10%;" class="center sorting" @click="sortList(event.target)" sort_target="reg_dt">가입일</th>
+                </tr>
+            </thead>
+            <tbody id="tbody_list">
+                <tr v-for="item in dataList"  @click="gotoDtl(item.user_id)" style="cursor: pointer;">
+                    <td class="center">{{item.rownum}}</td>
+                    <td class="center">{{item.name}}</td>
+                    <td class="center">{{item.jikgub_nm}}</td>
+                    <td class="center">{{item.user_id}}</td>
+                    <td class="center">{{item.statusnm}}</td>
+                    <td class="center">{{item.auth_nm}}</td>
+                    <td class="center">{{item.reg_dt_char}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="dataTables_paginate paging_simple_numbers" id="div_paginate">
+        </div>
+    </div>
+    
+    
+
+
+</body>
+
+</html>

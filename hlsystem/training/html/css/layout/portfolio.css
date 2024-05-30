@@ -73,7 +73,7 @@ body {
 .width-fix-100 {width:100px;}
 /* Form */
 .form-group { display: flex; align-items: center; justify-content: center; width: 100%;border: 1px solid #333333;}
-.form-group label {height:30px; font-weight: bold; text-align: right;margin-right: 10px;background-color: #123456;}
+.form-group label {height:30px; font-weight: bold; text-align: right;margin-right: 10px;background-color: #EEEEEE;}
 .form-group input { height: 30px; border: 1px solid var(--gray-200); margin-left:10px}
 .form-group select { flex: 1; height: 36px; border: 1px solid var(--gray-200);  }
 
