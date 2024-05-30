@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Reset CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet">
+    <!-- Google Noto Sans Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+	<!-- vue version 2-->
+	<script src="https://unpkg.com/vue@2"></script>	
+
+	<!-- Bilboard Chart(https://naver.github.io/billboard.js) -->
+	<script src="https://d3js.org/d3.v6.min.js"></script>
+	<script src="./js/billboard.js"></script>
+	<link rel="stylesheet" href="./css/billboard.css">
+	<!--jquery-->
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<!-- ï¥¹ëº??? Bootstrap ï¿½ì‰ª CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+ 	<!-- Imported styles on this page -->
+	<link rel="stylesheet" href="./css/datatables.css">
+	<link rel="stylesheet" href="./css/prod/prodcalc.css">
+	  
+	<title>Produc Calculation</title>
+</head>    
+<body class="page-body">
+
+	<div class="page-container">
+		<div class="main-content">
+			<div id="vueapp" class="right flex-column flex-100">
+				<div class="right-top flex-100">
+					<ul class="nav">
+						<li class="nav-tab active">nav 1</li>
+						<li class="nav-tab">nav 2</li>
+						<li class="nav-tab">nav 3</li>
+						<li class="nav-tab">nav 4</li>
+					</ul>
+					<div class="column-group flex-column flex-gap-10">
+						<div class="form-group flex-gap-10" style="justify-content: left">
+							<label class="width-100">search:</label>
+							<input class="width-100" id="prod_cd" value="1" v-model="info.prod_cd" disabled/>
+							<input class="width-100" id="prod_nm" value = "2" v-model="info.prod_nm" disabled/>
+							<button type="button" class="btn" @click="popupProd()">
+								<i class="fa fa-search"></i>
+							</button>
+						</div>
+						<div class="form-group flex-gap-10" style="justify-content:left">
+							<label class="width-100">equity money:</label>
+							<input type="number" min="0" placeholder="10" class="width-100" id="circle_acml_amt" v-model="info.circle_acml_amt" />
+							<button type="button" class="btn btn-transparent flex-10" @click="setCircleAcmlAmt(10)">+10</button>
+							<button type="button" class="btn btn-transparent flex-10" @click="setCircleAcmlAmt(50)">+50</button>
+							<button type="button" class="btn btn-transparent flex-10" @click="setCircleAcmlAmt(100)">+100</button>
+							<button type="button" class="btn btn-navy flex-10" @click="setCircleAcmlAmt(0)">clear</button>
+						</div>
+						<div class="form-group flex-gap-10" style="justify-content: left">
+							<label class="width-100">month:</label>
+							<input class="width-100" value="3" min="0" type="number" id="goal_prd" v-model="info.goal_prd" />
+							<button type="button" class="btn btn-transparent flex-10" @click="setGoalPrd(3)">+3</button>
+							<button type="button" class="btn btn-transparent flex-10" @click="setGoalPrd(6)">+6</button>
+							<button type="button" class="btn btn-transparent flex-10" @click="setGoalPrd(12)">+12</button>
+							<button type="button" class="btn btn-navy flex-10" @click="setGoalPrd(0)">clear</button>
+						</div>
+						<div class="form-group flex-gap-10" style="justify-content: left">
+							<label class="width-100">interest rate:</label>
+							<input class="width-100" type="number" id="aply_rate" value="3" placeholder="3" v-model="info.aply_rate" />
+						</div>
+						<div class="form-group flex-gap-10" style="justify-content: left;position: relative;">
+							<label class="width-100">tax option:</label>
+							<select class="width-100" id="pay_ty_cd" v-model="info.pay_ty_cd">
+								<option value="1" selected>1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
+							<button type="button" style="position:absolute;right: 0;bottom:10px;height: 50px;" class="btn btn-red" @click="prcCalc()">CALCULATE</button>
+						</div>
+					</div>
+				</div>
+				<div class="right-middle">
+					<ul class="nav">
+						<li class="nav-tab active">nav</li>
+					</ul>		
+				</div>
+				<div class="right-bottom flex-100 flex">
+					<div class="column-group  data-display ">
+						<div class="column-group flex-column flex-33 flex-gap-10" style="margin-bottom:30px ;" >
+							<div class="form-group">
+								<label class="width-100">amt:</label>
+								<input class="form-control" id="tot_dpst_amt" v-model="info.tot_dpst_amt" disabled />
+							</div>
+							<div class="form-group gap">
+								<label class="width-100">dps_int:</label>
+								<input class="form-control" id="tot_dpst_int" v-model="info.tot_dpst_int" disabled />
+							</div>
+							<div class="form-group">
+								<label class="width-100">tax_amt:</label>
+								<input class="form-control" id="int_tax_amt" v-model="info.int_tax_amt" disabled />
+							</div>
+							<div class="form-group">
+								<label class="width-100">rcv_amt:</label>
+								<input class="form-control" id="atx_rcve_amt" v-model="info.atx_rcve_amt" disabled />
+							</div>
+			
+						</div>
+					</div>	
+					<div class="column-group flex-33">
+						<div style="top: -40px; right: 10px; position: absolute;">
+							<button type="button"  class="btn btn-blue" @click="save()">save</button>
+							<button type="button"  class="btn btn-blue" @click="save()">close</button>
+						</div>
+						<div style="border: 1px solid #CCCCCC;">
+							<table class="table table-bordered datatable dataTable" id="grid_app">
+								<thead>
+									<tr class="replace-inputs">
+										<th style="width: 10%;" class="center">one</th>
+										<th style="width: 23%;" class="center">two</th>
+										<th style="width: 23%;" class="center">three</th>
+										<th style="width: 21%;" class="center">four</th>
+										<th style="width: 23%;" class="center">five</th>
+									</tr>
+								</thead>
+								<tbody id="grid_tbody"></tbody>
+							</table>			
+	
+						</div>
+					</div>
+					<div class="flex-33">
+						<div class="chart-display" id="chart">
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>						
+	</div>	
+	
+	<!-- ? ?‹¯?–µ?˜™ -->
+	<div class="modal fade" id="pop_code">
+		<template>
+			<div class="modal-dialog" style="width: 500px;">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="dataTables_wrapper">					
+							<div class="dt-buttons">
+								<div>
+									<input type="search" id="prod_cd" style="width: 100px;" v-model="prod_cd" disabled>
+									<input type="search" id="prod_nm" style="width: 250px;" v-model="prod_nm" disabled>
+									<button type="button" class="btn btn-red" style="margin-left: 5px;" @click="getList">
+										getList
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="dataTables_wrapper">		
+							<table class="table table-bordered datatable dataTable">
+								<thead style="position: sticky;top: 0px;">
+									<tr>
+										<th class="center" style="width: 15%;">one</th>
+										<th class="center" style="width: 55%;">two</th>
+										<th class="center" style="width: 30%;">three</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="item in dataList" @click="selItem(item.prod_cd)" style="cursor: pointer;">
+										<td class="center">{{item.prod_cd}}</td>
+										<td class="left">{{item.prod_nm}}</td>
+										<td class="left">{{item.sbstg_ty_cd_nm}}</td>
+									</tr>
+								</tbody>
+							</table>	
+						</div>				
+					</div>
+				</div>
+			</div>
+		</template>
+	</div>
+	
+		
+
+	<script>
+
+		/**vue app**/
+		var vueapp = new Vue({
+			el : "#vueapp",
+			data : {
+				info : {
+					prod_cd : 1,
+					prod_nm : 2,
+					goal_prd : 3,
+					pay_ty_cd : 1,
+					aply_rate : 5,
+					circle_acml_amt : 100,
+					tot_dpst_amt : 200,
+					tot_dpst_int : 300,
+					int_tax_amt : 400,
+					bfo_rcve_amt : 50,
+					atx_rcve_amt : 600,
+					date: "2020-01-01",
+				},
+			},
+			mounted : function(){
+				this.getInfo();
+			},
+			methods : {
+				getInfo : function(){
+				},
+				setCircleAcmlAmt : function(nAmt){
+					if(nAmt == 0) {
+						this.info.circle_acml_amt = 0;
+					}else {
+						//change to int first
+						this.info.circle_acml_amt = parseInt(this.info.circle_acml_amt,10);
+						this.info.circle_acml_amt += nAmt*10000;
+					}
+				},
+				setGoalPrd : function(nPrd){
+					if(nPrd == 0) {
+						this.info.goal_prd = 0;
+					}else {
+						//change to int first
+						this.info.goal_prd = parseInt(this.info.goal_prd,10);
+						this.info.goal_prd += nPrd;
+					}
+				},
+				popupProd : function(){
+					$("#pop_code").modal("show");
+				},
+				prcCalc : function(){
+					var nRvcy		= this.info.pay_ty_cd; // ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï¿½ëƒ²æ¿šë°¸Å¦ï¿½ëµ°? ?„?¡
+					var nPymAmt		= this.info.circle_acml_amt; // ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï¿½ëï¿½ë¼¨ï¿½ï¿½ï¿½ï¿½? ï¿½ì †ï¿½ï¿½ë¨??‚•? ?„?¡
+					var nRvpd		= this.info.goal_prd; // ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï¿½ëï¿½ë¼¨è½…ëª…ï¿½ì?¨ï¿½?š³?˜™
+					var nApplItr	= this.info.aply_rate; // ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´??ì˜™ï¿½êµ›? ?„?…“? ?Œë§¶å ?ˆ?»ï¿½ëœ? ï¿?
+					var nIntLvy		= this.info.pay_ty_cd; // ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï¿½ë„ƒ? ?™?˜™ï¿½ë??ï¿½ê± ? ?„?¡ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ï¿?
+					var nAmt1	= 0;	// ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï¿½ë‹ï¿½ë¼¨ï¿½ï¿½ï¿½ï¿½? ï¿½ì †ï¿½ï¿½ë¨??‚•? ?„?¡
+					var nAmt2	= 0;	// ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥? ‰?‘¼?˜™ï¿½ë??? ?ˆ?Š‚? ?„?¡ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï¿½ëæ¿šë°¸Å¦ï¿½ëµ°? ?„?¡
+					var nAmt3	= 0;	// ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï¿½ëƒ»ï¿½ëœï¿½ëŸ©ï¿½ë?²ï¿½?œï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ï¿?
+					var nInt	= 0;	// ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ï¿?
+					var nTotInt	= 0;	// ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ï¿?
+					var nTax	= 0;	// ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï¿½ë„ƒ? ?™?˜™ï¿½ë??ï¿½ê± ? ?„?¡ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ï¿?
+					var html = '';
+					for(var i=1; i<=nRvpd; i++) {
+						
+						if(nRvcy == 1) {
+							nAmt1 = nPymAmt;
+						} else if(i % nRvcy == 1) {
+							nAmt1 = nPymAmt * nRvcy;
+						} else {
+							nAmt = 0;
+						}
+						nAmt2 += nAmt1;
+						nInt = nAmt2 * (nApplItr / 12 / 100);
+						nAmt3 = nAmt3 + nAmt1 + nInt;
+						nTotInt += nInt;
+						html += '<tr>';
+						html += '<td class="right" style="text-align: right;">' + i + '</td>';
+						html += '<td class="right" style="text-align: right;">' + numberFormat(Math.round(nAmt1)) + '</td>';
+						html += '<td class="right" style="text-align: right;">' + numberFormat(Math.round(nAmt2)) + '</td>';
+						html += '<td class="right" style="text-align: right;">' + numberFormat(Math.round(nInt)) + '</td>';
+						html += '<td class="right" style="text-align: right;">' + numberFormat(Math.round(nAmt3)) + '</td>';
+						html += '</tr>';
+					}
+					if(this.info.int_tax_ty_cd == "1") {		// ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥? ‰ï½‡ë›¾ï¿½ë£‡?‘—?“¸?˜™? ?™?˜™ï¿½ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ï¿?
+						nTax = Math.round(nTotInt * 15.4 / 100);
+					} else if(this.info.int_tax_ty_cd == "2") {	// ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï¿½ë„¦ï¿½ëœï¿½ëŸ©ï¿½ë?²ï¿½?œï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶? ?ˆ?»ï¿½ëœ? ï¿?
+						nTax = Math.round(nTotInt * 1.4 / 100);
+					}else {										// ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥ï¿½ë§¶? ?ˆ?»ï¿½ëœ? ï¿?
+						nTax = 0;
+					}
+					nAmt3 = Math.round(nAmt3);
+					this.info.tot_dpst_amt = nAmt2;
+					this.info.tot_dpst_int = nTotInt;
+					this.info.int_tax_amt = nTax;
+					this.info.bfo_rcve_amt = nAmt3;
+					this.info.atx_rcve_amt = nAmt3 - nTax;
+					$("#grid_tbody").html(html);
+					
+					// ï¿½ëœï¿½ëŸ¥ï¿½ë§¶ï¿½ëœï¿½ëŸ¥ï§ì?¥ëœï¿½ëŸ©?´ê¿¨ëœï¿½ëŸ¥è«?ï¿?
+					var chart = bb.generate({
+						data: {
+							columns: [
+								["1"	, nAmt2],
+								["2"	, nTotInt],
+								["3"	, nAmt3],
+								["4"	, nTax],
+								["5"	, nAmt3 - nTax],
+							],
+							type: "bar",
+							size :{
+								width: 100,
+								height: 50
+							},
+							groups: [
+								[]
+							],
+							order: null
+						},
+						bindto: "#chart"
+					});
+					
+				},
+			}
+		});	
+		/*** pop window vue**/
+		var pop_code = new Vue({
+			el : "#pop_code",
+			data : {
+				dataList : [],
+				prod_cd : "",
+				prod_nm : "",
+			},
+			mounted : function(){
+				this.getList();
+			},
+			methods : {
+				getList : function(){
+					/** mock data **/
+					this.prod_cd = vueapp.info.prod_cd;
+					this.prod_nm = vueapp.info.prod_nm;
+					this.dataList = [{
+						prod_cd : this.prod_cd,
+						prod_nm : this.prod_nm,
+						sbstg_ty_cd_nm : 100
+
+					}];
+					var params = {
+						prod_cd : this.prod_cd,
+						prod_nm : this.prod_nm,
+					}
+
+				},
+				selItem : function(prod_cd){
+					
+					vueapp.info.prod_cd = this.prod_cd;
+					vueapp.info.prod_nm = this.prod_nm;
+					vueapp.getInfo();
+					$("#pop_code").modal("hide");
+				},
+			},
+		});	
+		//function
+		function numberFormat(num) {
+			num = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			return num;
+		}
+	</script>
+
+</body>
+
+
+</html>
