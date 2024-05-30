@@ -5,6 +5,8 @@
 <head>
 	<jsp:include page="/WEB-INF/jsp/kcg/_include/system/header_meta.jsp" flush="false"/>
 	<!-- Imported styles on this page -->
+	<link rel="stylesheet" href="/static_resources/system/js/datatables/proddtl.css">
+	
 	<title>관리자시스템</title>
 </head>
 <body class="page-body">
@@ -25,171 +27,158 @@
 		<h2>사용자 상세</h2>
 		<br />
 		
-		<div class="row">
-			<div id="vueapp" style="width: 910px; margin-left: 15px;">
-			<template>
-				<div class="panel panel-primary" data-collapsed="0">
-									
-					<div class="panel-body">
-			
-					<form class="form-horizontal form-groups-bordered">
-			
+		<div class="flex-wrap">
+		    <div id="vueapp" style="width: 100%; margin-left: 15px;">
+		    <template>
+		        <div class="panel-body">
+		            <div class="left-panel flex-50">
+		                <div class="form-group">
+		                    <label id ="user_id">아이디</label>
+		
+		                    <input class = "form-control" type="text" id="user_id" v-model="info.user_id" :readonly="info.save_mode != 'insert' || is_id_chk">
+		
+		                    <div class="form-control" id="btn_chk_id_dupl" v-if="info.save_mode == 'insert' && !is_id_chk">
+		                        <button class="btn btn-primary" type="button" @click="chk_id_dupl">	
+		                            <span>중복체크</span>	
+		                        </button>
+		                    </div>
+		                    <div  class="form-control"  v-if="info.save_mode == 'insert' && is_id_chk">
+		                        <button class="btn btn-primary" type="button" @click="change_id">	
+		                            <span>아이디변경</span>
+		                        </button>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="name" >사용자명</label>		
+		                    <input type="text" class="form-control" id="name" v-model="info.name" :readonly="info.iam_yn == 'Y'">
+						</div>
 						<div class="form-group">
-							<label for="user_id" class="col-sm-1 control-label">아이디</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="user_id" v-model="info.user_id" :readonly="info.save_mode != 'insert' || is_id_chk">
-							</div>
-							<div class="col-sm-3" id="btn_chk_id_dupl" v-if="info.save_mode == 'insert' && !is_id_chk">
-								<button class="btn btn-primary" type="button" @click="chk_id_dupl">	
-									<span>중복체크</span>	
-								</button>
-							</div>
-							<div class="col-sm-3" v-if="info.save_mode == 'insert' && is_id_chk">
-								<button class="btn btn-primary" type="button" @click="change_id">	
-									<span>아이디변경</span>
-								</button>
-							</div>
-						</div>
-			
-						<div class="form-group">
-							<label for="name" class="col-sm-1 control-label">사용자명</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="name" v-model="info.name" :readonly="info.iam_yn == 'Y'">
-							</div>
-							<label class="col-sm-1 control-label" v-if="info.save_mode != 'insert'">가입일</label>
-							<div class="col-sm-3" v-if="info.save_mode != 'insert'">
-								<input type="text" class="form-control" id="reg_dt_char" v-model="info.reg_dt_char" readonly>
-							</div>
-						</div>
-			
-						<div class="form-group">
-							<label for="jikgub_nm" class="col-sm-1 control-label">직책</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="jikgub_nm" v-model="info.jikgub_nm" :readonly="info.iam_yn == 'Y'">
-							</div>
-							<label for="tdept_nm" class="col-sm-1 control-label">부서</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="tdept_nm" v-model="info.tdept_nm" :readonly="info.iam_yn == 'Y'">
-							</div>
-						</div>
-			
-						<div class="form-group">
-							<label class="col-sm-1 control-label">재직상태</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="statusnm" v-model="info.statusnm" readonly>
-							</div>
-							<label for="email" class="col-sm-1 control-label">이메일</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="email" v-model="info.email" :readonly="info.iam_yn == 'Y'">
-							</div>
-						</div>
-			
-						<div class="form-group" v-if="info.save_mode == 'insert'">
-							<label for="user_pw" class="col-sm-1 control-label">비밀번호</label>
-							
-							<div class="col-sm-3">
-								<input type="password" class="form-control" id="user_pw" v-model="info.user_pw">
-							</div>
-						</div>
-			
-						<div class="form-group" v-if="info.save_mode == 'insert'">
-							<label for="user_pw_confirm" class="col-sm-1 control-label">비밀번호 확인</label>
-							
-							<div class="col-sm-3">
-								<input type="password" class="form-control" id="user_pw_confirm" v-model="info.user_pw_confirm">
-							</div>
-						</div>
-			
-						<div class="form-group" v-if="info.save_mode != 'insert' && info.iam_yn != 'Y'">
-							<label for="btn_initpw" class="col-sm-1 control-label">비밀번호</label>
-							<div class="col-sm-3">
-								<button class="btn btn-primary" type="button" id="btn_initpw" @click="openPopInitPw">	
-									<span>초기화</span>	
-									<i class="entypo-ccw"></i>
-								</button>
-							</div>
-						</div>
-			
-						<div class="form-group">
-							<label for="gis_auth" class="col-sm-1 control-label">GIS권한</label>
-							<div class="col-sm-2">
-								<select class="form-control" id="gis_auth" v-model="info.gis_auth">
-										<option value="1">1 (기본값)</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-								</select>
-							</div>
-						</div>
-			
-						<div class="form-group">
-							<label for="auth_cd" class="col-sm-1 control-label">메뉴권한</label>
-							<div class="col-sm-2">
-								<select class="form-control" id="auth_cd" v-model="info.auth_cd">
-									<c:forEach var="item" items="${authList}">
-										<option value="${item.auth_cd}">${item.auth_nm}</option>
-									</c:forEach>
-								</select>
-							</div>
-						</div>
-						
-						<div class="form-group" v-if="info.auth_cd != 'normal'">
-							<label for="auth_cd" class="col-sm-1 control-label">
-								관리시스템
-							</label>
-							<div class="col-sm-10">
-								<button type="button" class="btn btn-black btn-icon btn-small" @click="openPopSystemList">
-									추가
-									<i class="entypo-plus"></i>
-								</button>
-								<button type="button" class="btn btn-red btn-icon btn-small" @click="delSystem">
-									선택삭제
-									<i class="entypo-minus"></i>
-								</button>
-								<table class="table table-bordered" style="margin-top: 10px;">
-									<thead>
-										<tr>
-											<th class="center" style="width: 5%;"><input type="checkbox" @change="allCheckChng(event.target)"/></th>
-											<th class="center" style="width: 30%;">시스템명</th>
-											<th class="center" style="width: 10%;">HIVE DB명</th>
-											<th class="center" style="width: 30%;">테이블영문명</th>
-											<th class="center" style="width: 25%;">테이블한글명</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr v-for="item in info.userSystemMappingList">
-											<td class="center"><input type="checkbox" name="itemchk" v-model="item.chk" /></td>
-											<td class="center">{{item.sys_nm}}</td>
-											<td class="center">{{item.hive_db_nm}}</td>
-											<td class="center">{{item.table_eng_nm}}</td>
-											<td class="center">{{item.table_korean_nm}}</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-5">
-								<button type="button" class="btn btn-green btn-icon btn-small" @click="save">
-									저장
-									<i class="entypo-check"></i>
-								</button>
-								<button type="button" class="btn btn-red btn-icon btn-small" @click="delInfo" v-if="info.save_mode != 'insert' && info.iam_yn != 'Y'">
-									삭제
-									<i class="entypo-trash"></i>
-								</button>
-								<button type="button" class="btn btn-blue btn-icon btn-small" @click="gotoList">
-									목록
-									<i class="entypo-list"></i>
-								</button>
-							</div>
-						</div>
-					</form>
-					</div>
-				</div>
-			</template>
-			</div>
-		</div>
+		                    <label v-if="info.save_mode != 'insert'">가입일</label>
+		                    <div v-if="info.save_mode != 'insert'" class="form-control">
+		                        <input type="text" class="form-control" id="reg_dt_char" v-model="info.reg_dt_char" readonly>
+		                    </div>
+		                </div>
+		    
+		                <div class="form-group">
+		                    <label for="jikgub_nm" >직책</label>		
+		                    <input type="text" class="form-control" id="jikgub_nm" v-model="info.jikgub_nm" :readonly="info.iam_yn == 'Y'">
+		                </div>
+		                <div class="form-group">
+		                    <label for="tdept_nm">부서</label>		
+		                    <input type="text" class="form-control" id="tdept_nm" v-model="info.tdept_nm" :readonly="info.iam_yn == 'Y'">		
+		                </div>
+		    
+		                <div class="form-group">
+		                    <label>재직상태</label>
+		
+		                    <input type="text" class="form-control" id="statusnm" v-model="info.statusnm" readonly>
+		                </div>
+		                <div class="form-group">
+		                    <label for="email">이메일</label>              
+		                    <input type="text" class="form-control" id="email" v-model="info.email" :readonly="info.iam_yn == 'Y'">                    
+		                </div>
+		    
+		                <div class="form-group" v-if="info.save_mode == 'insert'">
+		                    <label for="user_pw">비밀번호</label>
+		                    <input type="password" class="form-control" id="user_pw" v-model="info.user_pw">                       
+		                </div>
+		    
+		                <div class="form-group" v-if="info.save_mode == 'insert'">
+		                    <label for="user_pw_confirm" class="col-sm-1 control-label">비밀번호 확인</label>		                    		
+		                    <input type="password" class="form-control" id="user_pw_confirm" v-model="info.user_pw_confirm">		
+		                </div>		    
+		                <div class="form-group" v-if="info.save_mode != 'insert' && info.iam_yn != 'Y'">
+		                    <label for="btn_initpw">비밀번호</label>	                    
+	                        <button class="btn btn-primary" type="button" id="btn_initpw" @click="openPopInitPw">	
+	                            <span>초기화</span>	
+	                            <i class="entypo-ccw"></i>
+	                        </button>
+		                </div>		               
+		           </div>
+		            <div class="right-panel flex-50" style="position: relative;">
+		                <div class="form-group">
+		                    <label for="gis_auth">GIS권한</label>		
+		                    <select class="form-control" id="gis_auth" v-model="info.gis_auth">
+		                            <option value="1">1 (기본값)</option>
+		                            <option value="2">2</option>
+		                            <option value="3">3</option>
+		                    </select>		
+		                </div>		    
+		                <div class="form-group">
+		                    <label for="auth_cd" >메뉴권한</label>
+		                    
+		                        <select class="form-control" id="auth_cd" v-model="info.auth_cd">
+		                            <c:forEach var="item" items="${authList}">
+		                                <option value="${item.auth_cd}">${item.auth_nm}</option>
+		                            </c:forEach>
+		                        </select>
+		                    
+		                </div>
+		                		               		                
+		                <div class="form-group">
+		                    <label for="auth_cd" >
+		                        관리시스템
+		                    </label>
+		                </div>      
+	                    <table class="table table-bordered" style="margin-top: 10px;">
+	                        <thead>
+	                            <tr>
+	                                <th class="center" style="width: 5%;"><input type="checkbox" @change="allCheckChng(event.target)"/></th>
+	                                <th class="center" style="width: 30%;">시스템명</th>
+	                                <th class="center" style="width: 10%;">HIVE DB명</th>
+	                                <th class="center" style="width: 30%;">테이블영문명</th>
+	                                <th class="center" style="width: 25%;">테이블한글명</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                            <tr v-for="item in info.userSystemMappingList">
+	                                <td class="center"><input type="checkbox" name="itemchk" v-model="item.chk" /></td>
+	                                <td class="center">{{item.sys_nm}}</td>
+	                                <td class="center">{{item.hive_db_nm}}</td>
+	                                <td class="center">{{item.table_eng_nm}}</td>
+	                                <td class="center">{{item.table_korean_nm}}</td>
+	                            </tr>
+	                        </tbody>
+                        </table>	
+		                <div class="form-group" v-if="info.auth_cd != 'normal'"  style="position: absolute;bottom: 5px;">
+
+	                        <button type="button" class="btn btn-black btn-icon btn-small" @click="openPopSystemList">
+	                            추가
+	                            <i class="entypo-plus"></i>
+	                        </button>
+	                        <button type="button" class="btn btn-red btn-icon btn-small" @click="delSystem">
+	                            선택삭제
+	                            <i class="entypo-minus"></i>
+	                        </button>
+
+		                </div>
+	                        	                		    
+		                 
+		            </div>     
+		        </div> 
+		        
+             <div class="form-group">
+	             <div >
+	                 <button type="button" class="btn btn-green btn-icon btn-small" @click="save">
+	                     저장
+	                     <i class="entypo-check"></i>
+	                 </button>
+	                 <button type="button" class="btn btn-red btn-icon btn-small" @click="delInfo" v-if="info.save_mode != 'insert' && info.iam_yn != 'Y'">
+	                     삭제
+	                     <i class="entypo-trash"></i>
+	                 </button>
+	                 <button type="button" class="btn btn-blue btn-icon btn-small" @click="gotoList">
+	                     목록
+	                     <i class="entypo-list"></i>
+	                 </button>
+	             </div>
+		    </div>		        
+		    </div>	
+
+
+		    
+		    </template>	
+		    </div>
 		
 		<br />
 		
