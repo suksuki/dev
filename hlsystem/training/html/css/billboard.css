@@ -164,7 +164,7 @@
     padding: 3px 6px;
     background-color: #fff;
     border-left: 1px dotted #999; }
-    .bb-tooltip td > span, .bb-tooltip td > svg {
+    .bb-tooltip td > div, .bb-tooltip td > svg {
       display: inline-block;
       width: 10px;
       height: 10px;

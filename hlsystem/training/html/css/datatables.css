@@ -902,7 +902,7 @@ table.dataTable > tbody > tr.child ul li:first-child {
 table.dataTable > tbody > tr.child ul li:last-child {
   border-bottom: none;
 }
-table.dataTable > tbody > tr.child span.dtr-title {
+table.dataTable > tbody > tr.child div.dtr-title {
   display: inline-block;
   min-width: 75px;
   font-weight: bold;
@@ -997,14 +997,14 @@ table.dataTable tr.selected td.select-checkbox:after {
   text-shadow: 1px 1px #B0BED9, -1px -1px #B0BED9, 1px -1px #B0BED9, -1px 1px #B0BED9;
 }
 
-div.dataTables_wrapper span.select-info,
-div.dataTables_wrapper span.select-item {
+div.dataTables_wrapper div.select-info,
+div.dataTables_wrapper div.select-item {
   margin-left: 0.5em;
 }
 
 @media screen and (max-width: 640px) {
-  div.dataTables_wrapper span.select-info,
-  div.dataTables_wrapper span.select-item {
+  div.dataTables_wrapper div.select-info,
+  div.dataTables_wrapper div.select-item {
     margin-left: 0;
     display: block;
   }

@@ -584,7 +584,7 @@ function setTextValue(node, text, dy, toMiddle) {
       node.html("");
       multiline.forEach(function (v, i) {
         _newArrowCheck(this, _this4);
-        node.append("tspan").attr("x", 0).attr("dy", (i === 0 ? dy[0] * len : dy[1]) + "em").text(v);
+        node.append("tdiv").attr("x", 0).attr("dy", (i === 0 ? dy[0] * len : dy[1]) + "em").text(v);
       }.bind(this));
     }
   }
@@ -3222,7 +3222,7 @@ var data_this = undefined;
    *  If true given, all legend will be hidden. If string or array given, only the legend that has the id will be hidden.
    * @property {string|HTMLElement} [legend.contents.bindto=undefined] Set CSS selector or element reference to bind legend items.
    * - **NOTE:** Should be used along with `legend.contents.template`.
-   * @property {string|Function} [legend.contents.template="<span style='color:#fff;padding:5px;background-color:{=COLOR}'>{=TITLE}</span>"] Set item's template.<br>
+   * @property {string|Function} [legend.contents.template="<div style='color:#fff;padding:5px;background-color:{=COLOR}'>{=TITLE}</div>"] Set item's template.<br>
    *  - If set `string` value, within template the 'color' and 'title' can be replaced using template-like syntax string:
    *    - {=COLOR}: data color value
    *    - {=TITLE}: data title value
@@ -3353,7 +3353,7 @@ var data_this = undefined;
    *  }
    */
   legend_contents_bindto: undefined,
-  legend_contents_template: "<span style='color:#fff;padding:5px;background-color:{=COLOR}'>{=TITLE}</span>",
+  legend_contents_template: "<div style='color:#fff;padding:5px;background-color:{=COLOR}'>{=TITLE}</div>",
   legend_equally: !1,
   legend_hide: !1,
   legend_inset_anchor: "top-left",
@@ -3567,22 +3567,22 @@ var tooltip_this = undefined;
    *       // specify tooltip contents using template
    *       // - example of HTML returned:
    *       // <ul class="bb-tooltip">
-   *       //   <li class="bb-tooltip-name-data1"><span>250</span><br><span style="color:#00c73c">data1</span></li>
-   *       //   <li class="bb-tooltip-name-data2"><span>50</span><br><span style="color:#fa7171">data2</span></li>
+   *       //   <li class="bb-tooltip-name-data1"><div>250</div><br><div style="color:#00c73c">data1</div></li>
+   *       //   <li class="bb-tooltip-name-data2"><div>50</div><br><div style="color:#fa7171">data2</div></li>
    *       // </ul>
    *       contents: {
    *      	bindto: "#tooltip",
    *      	template: '<ul class={=CLASS_TOOLTIP}>{{' +
-   *      			'<li class="{=CLASS_TOOLTIP_NAME}"><span>{=VALUE}</span><br>' +
-   *      			'<span style=color:{=COLOR}>{=NAME}</span></li>' +
+   *      			'<li class="{=CLASS_TOOLTIP_NAME}"><div>{=VALUE}</div><br>' +
+   *      			'<div style=color:{=COLOR}>{=NAME}</div></li>' +
    *      		'}}</ul>'
    *      }
    *
    *       // with additional text value
    *       // - example of HTML returned:
    *       // <ul class="bb-tooltip">
-   *       //   <li class="bb-tooltip-name-data1"><span>250</span><br>comment1<span style="color:#00c73c">data1</span>text1</li>
-   *       //   <li class="bb-tooltip-name-data2"><span>50</span><br>comment2<span style="color:#fa7171">data2</span>text2</li>
+   *       //   <li class="bb-tooltip-name-data1"><div>250</div><br>comment1<div style="color:#00c73c">data1</div>text1</li>
+   *       //   <li class="bb-tooltip-name-data2"><div>50</div><br>comment2<div style="color:#fa7171">data2</div>text2</li>
    *       // </ul>
    *       contents: {
    *      	bindto: "#tooltip",
@@ -3593,8 +3593,8 @@ var tooltip_this = undefined;
    *      		VAR2: ["comment1", "comment2"],
    *      	},
    *      	template: '<ul class={=CLASS_TOOLTIP}>{{' +
-   *      			'<li class="{=CLASS_TOOLTIP_NAME}"><span>{=VALUE}</span>{=VAR2}<br>' +
-   *      			'<span style=color:{=COLOR}>{=NAME}</span>{=VAR1}</li>' +
+   *      			'<li class="{=CLASS_TOOLTIP_NAME}"><div>{=VALUE}</div>{=VAR2}<br>' +
+   *      			'<div style=color:{=COLOR}>{=NAME}</div>{=VAR1}</li>' +
    *      		'}}</ul>'
    *      }
    *
@@ -5167,7 +5167,7 @@ function getDataKeyForJson(keysParam, config) {
       let target = event.target;
 
       // in case of multilined axis text
-      if (/tspan/i.test(target.tagName)) {
+      if (/tdiv/i.test(target.tagName)) {
         target = target.parentNode;
       }
       const d = (0,external_commonjs_d3_selection_commonjs2_d3_selection_amd_d3_selection_root_d3_.select)(target).datum();
@@ -9930,7 +9930,7 @@ function getTextXPos(pos, width) {
         const title = (state.hasAxis || state.hasRadar) && titleFormat(row.x);
         text = tplProcess(tpl[0], {
           CLASS_TOOLTIP: $TOOLTIP.tooltip,
-          TITLE: isValue(title) ? tplStr ? title : "<tr><th colspan=\"2\">" + title + "</th></tr>" : ""
+          TITLE: isValue(title) ? tplStr ? title : "<tr><th coldiv=\"2\">" + title + "</th></tr>" : ""
         });
       }
       if (!row.ratio && $el.arcs) {
@@ -10002,7 +10002,7 @@ function getTextXPos(pos, width) {
    * @private
    */
   getTooltipContentTemplate: function getTooltipContentTemplate(tplStr) {
-    return (tplStr || "<table class=\"{=CLASS_TOOLTIP}\"><tbody>\n\t\t\t\t{=TITLE}\n\t\t\t\t{{<tr class=\"{=CLASS_TOOLTIP_NAME}\">\n\t\t\t\t\t<td class=\"name\">" + (this.patterns ? "{=COLOR}" : "<span style=\"background-color:{=COLOR}\"></span>") + "{=NAME}</td>\n\t\t\t\t\t<td class=\"value\">{=VALUE}</td>\n\t\t\t\t</tr>}}\n\t\t\t</tbody></table>").replace(/(\r?\n|\t)/g, "").split(/{{(.*)}}/);
+    return (tplStr || "<table class=\"{=CLASS_TOOLTIP}\"><tbody>\n\t\t\t\t{=TITLE}\n\t\t\t\t{{<tr class=\"{=CLASS_TOOLTIP_NAME}\">\n\t\t\t\t\t<td class=\"name\">" + (this.patterns ? "{=COLOR}" : "<div style=\"background-color:{=COLOR}\"></div>") + "{=NAME}</td>\n\t\t\t\t\t<td class=\"value\">{=VALUE}</td>\n\t\t\t\t</tr>}}\n\t\t\t</tbody></table>").replace(/(\r?\n|\t)/g, "").split(/{{(.*)}}/);
   },
   /**
    * Update tooltip position coordinate
@@ -12044,7 +12044,7 @@ function getGlyph(svg) {
       }, _ref2;
     }.bind(this);
     if (t.childElementCount > 1) {
-      toArray(t.querySelectorAll("tspan")).filter(filterFn).forEach(function (ts) {
+      toArray(t.querySelectorAll("tdiv")).filter(filterFn).forEach(function (ts) {
         _newArrowCheck(this, _this5);
         glyph.push(getStyleFn(ts));
       }.bind(this));
@@ -14275,7 +14275,7 @@ let AxisRenderer = /*#__PURE__*/function () {
         tickShow.text && tickEnter.append("text");
         const sizeFor1Char = AxisRendererHelper.getSizeFor1Char(tick),
           counts = [];
-        let tspan = tick.select("text").selectAll("tspan").data(function (d, index) {
+        let tdiv = tick.select("text").selectAll("tdiv").data(function (d, index) {
           var _this2 = this;
           _newArrowCheck(this, _this);
           const split = params.tickMultiline ? splitTickText(d, scale1, ticks, isLeftRight, sizeFor1Char.w) : isArray(helper.textFormatted(d)) ? helper.textFormatted(d).concat() : [helper.textFormatted(d)];
@@ -14288,14 +14288,14 @@ let AxisRenderer = /*#__PURE__*/function () {
             };
           }.bind(this));
         }.bind(this));
-        tspan.exit().remove();
-        tspan = tspan.enter().append("tspan").merge(tspan).text(function (d) {
+        tdiv.exit().remove();
+        tdiv = tdiv.enter().append("tdiv").merge(tdiv).text(function (d) {
           _newArrowCheck(this, _this);
           return d.splitted;
         }.bind(this));
 
-        // set <tspan>'s position
-        tspan.attr("x", isTopBottom ? 0 : tickLength * sign).attr("dx", function () {
+        // set <tdiv>'s position
+        tdiv.attr("x", isTopBottom ? 0 : tickLength * sign).attr("dx", function () {
           _newArrowCheck(this, _this);
           let dx = 0;
           if (/(top|bottom)/.test(orient) && rotate) {
@@ -22220,7 +22220,7 @@ const cacheKeyPoints = KEY.radarPoints,
         }
         if (posY > height) {
           // update vertical centered edge axis text dy position
-          if (posY / 2 === height && this.firstChild.tagName === "tspan") {
+          if (posY / 2 === height && this.firstChild.tagName === "tdiv") {
             this.firstChild.setAttribute("dy", "0em");
           }
           posY += y;
@@ -25640,7 +25640,7 @@ function selection_objectSpread(e) { for (var r = 1, t; r < arguments.length; r+
       resetButton = config.zoom_resetButton;
     if (resetButton && config.zoom_type === "drag") {
       if (!$el.zoomResetBtn) {
-        $el.zoomResetBtn = $$.$el.chart.append("div").classed($COMMON.button, !0).append("span").on("click", function () {
+        $el.zoomResetBtn = $$.$el.chart.append("div").classed($COMMON.button, !0).append("div").on("click", function () {
           isFunction(resetButton.onclick) && resetButton.onclick.bind($$.api)(this);
           $$.api.unzoom();
         }).classed($ZOOM.buttonZoomReset, !0).text(resetButton.text || "Reset Zoom");

@@ -37,11 +37,11 @@
         <div class="flex flex-100">
             <div class="flex-wrap flex-66 flex flex-gap-10 flex-padding-10">   
                 <div class="form-group flex-40">
-                    <label class="form-control">상품명:</label>
+                    <label class="fix-width-33">상품명:</label>
                     <input class="form-control" v-model="prod_nm" value="" />
                 </div>
                 <div class="form-group flex-40">
-                    <label class="form-control">가입대상:</label>
+                    <label class="fix-width-33">가입대상:</label>
                     <select v-model="sbstg_ty_cd" class="form-control">
                         <option value="0">전체</option>
                         <option value="1">일반개인</option>
@@ -49,11 +49,11 @@
                     </select>
                 </div>
                 <div class="form-group flex-40">
-                    <label class="form-control">판매시작일:</label>
+                    <label class="fix-width-33">판매시작일:</label>
                     <input type="text" class="form-control" v-model="from_date" data-format="yyyy-mm-dd" style="width: 180px;">
                 </div> 
                 <div class="form-group flex-40">
-                    <label class="form-control">납입주기:</label>
+                    <label class="fix-width-33">납입주기:</label>
                         <select v-model="pay_ty_cd" class="form-control">
                             <option value="">전체</option>
                             <option value="1">월납</option>

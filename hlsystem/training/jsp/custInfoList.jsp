@@ -36,19 +36,19 @@
                 <div class="flex flex-100">
                     <div class="flex-wrap flex-66 flex flex-gap-10 flex-padding-10">   
                         <div class="form-group flex-40">
-                            <label class="form-control">고객명 :</label>
+                            <label class="fix-width-33">고객명 :</label>
                             <input class="form-control" v-model="cust_nm" value="">                    
                         </div>
                         <div class="form-group flex-40">
-                            <label class="form-control">관리담당자:</label>
+                            <label class="fix-width-33">관리담당자:</label>
                             <input class="form-control" v-model="pic_nm" value="">                    
                         </div>
                         <div class="form-group flex-40">
-                            <label class="form-control">생년월일:</label>
+                            <label class="fix-width-33">생년월일:</label>
                             <input type="text" class="form-control" v-model="frrno">
                         </div> 
                         <div class="form-group flex-40">
-                            <label class="form-control">관리부서:</label>
+                            <label class="fix-width-33">관리부서:</label>
                             <input type="text" class="form-control" v-model="dept_nm">
                         </div>
                     </div>  

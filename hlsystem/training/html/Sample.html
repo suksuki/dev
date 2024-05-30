@@ -12,8 +12,7 @@
     <!-- Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <!-- 공통 스타일 -->
-    <link rel="stylesheet" href="./css/common.css" />
-    <link rel="stylesheet" href="./css/sample.css" />
+    <link rel="stylesheet" href="./css/layout/portfolio.css" />
     <title>Sample For CSS</title>
 </head>
 <body class="flex-center">
@@ -24,19 +23,17 @@
                 <i class="fa fa-times"></i>
             </button>
         </div>
-        <div class="modal-body flex-raw">
-            <form class="side-form flex-column flex-40">
-                <span>
-                    <label>상품명 : </label>
-                </span>
-                <span class="form-group">
-                    <input class="form-control" placeholder="우리사랑 행복 적금">
+        <div class="panel-body">
+            <form class="left-panel flex-50 flex-gap-5">
+                <div class="form-group">
+                    <label class="fix-width-33">상품명 : </label> 
+                    <input class="form-control " placeholder="우리사랑 행복 적금">
                     </input>
-                </span>
-                <span class="form-group">
+                </div>
+                <div class="form-group flex-gap-5">
                     <button class="btn btn-blue flex-50">조건 검색</button>
                     <button class="btn btn-blue flex-50">전체 검색</button>
-                </span>
+                </div>
                 <table class="table">
                     <thead>
                         <tr>
@@ -50,7 +47,7 @@
                             <td> 
                                 <label class="form-control flex-center">
                                     <input type="radio" value="1" name="radio-group" checked="true"/>
-                                    <span class="radio-circle"></span>
+                                    <div class="radio-circle"></div>
                                 </label>
                             </td>
                             <td>우리사랑 행복 적금(A1200) </td>
@@ -60,7 +57,7 @@
                             <td> 
                                 <label class="form-control flex-center">
                                     <input type="radio" value="2" name="radio-group" />
-                                    <span class="radio-circle"></span>
+                                    <div class="radio-circle"></div>
                                 </label>
                              </td>
                              <td>우리사랑 행복 적금(A1200)</td>
@@ -70,7 +67,7 @@
                             <td> 
                                 <label class="form-control flex-center">
                                     <input type="radio" value="3" name="radio-group" />
-                                    <span class="radio-circle"></span>
+                                    <div class="radio-circle"></div>
                                 </label>
                              </td>
                             <td>우리사랑 행복 적금(A1200) </td>
@@ -80,7 +77,7 @@
                             <td> 
                                 <label class="form-control flex-center">
                                     <input type="radio" value="4" name="radio-group" />
-                                    <span class="radio-circle"></span>
+                                    <div class="radio-circle"></div>
                                 </label>
                               </td>
                              <td>우리사랑 행복 적금(A1200) </td>
@@ -91,7 +88,7 @@
                             <td> 
                                 <label class="form-control flex-center">
                                     <input type="radio" value="5" name="radio-group" />
-                                    <span class="radio-circle"></span>
+                                    <div class="radio-circle"></div>
                                 </label>
                               </td>
                              <td>우리사랑 행복 적금(A1200) </td>
@@ -101,7 +98,7 @@
                             <td> 
                                 <label class="form-control flex-center">
                                     <input type="radio" value="6" name="radio-group" />
-                                    <span class="radio-circle"></span>
+                                    <div class="radio-circle"></div>
                                 </label>
                               </td>
                              <td>우리사랑 행복 적금(A1200) </td>
@@ -111,7 +108,7 @@
                             <td> 
                                 <label class="form-control flex-center">
                                     <input type="radio" value="7" name="radio-group" />
-                                    <span class="radio-circle"></span>
+                                    <div class="radio-circle"></div>
                                 </label>
                               </td>
                              <td>우리사랑 행복 적금(A1200) </td>
@@ -121,98 +118,98 @@
                 </table>
     
             </form>
-            <form class="side-form flex-column flex-50">
-                <span class="form-group">
-                    <label>*상품명 :</label>
+            <form class="right-panel flex-50 flex-gap-5">
+                <div class="form-group">
+                    <label class="fix-width-33">*상품명 :</label>
                     <input class="form-control" placeholder="우리사랑 행복적금">
                     </input>
-                </span>
-                <span class="form-group">
-                    <label>*상품코드 :</label>
+                </div>
+                <div class="form-group">
+                    <label class="fix-width-33">*상품코드 :</label>
                     <input class="form-control" placeholder="A1200">
                     </input>
-                </span>
-                <span class="form-group">
-                    <label>*상품유형: </label>
+                </div>
+                <div class="form-group">
+                    <label class="fix-width-33">*상품유형: </label>
                     <input class="form-control" placeholder="적금">
                     </input>
-                </span>
-                <span class="form-group">
-                    <label>*가입대상 : </label>
+                </div>
+                <div class="form-group">
+                    <label class="fix-width-33">*가입대상 : </label>
                     <input class="form-control" placeholder="일반개인">
                     </input>
-                </span>
-                <span class="form-group">
-                    <label>*가입(목표)기간: </label>
-                    <span class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="fix-width-33">*가입(목표)기간: </label>
+                    <div class="form-control">
                         <label>(최소)</label>
                         <input class="input-number" type="number" value="6"></input>
                         <label>개월 ~ (최대)</label>
                         <input class="input-number" type="number" value="12"></input>
                         <label>개월</label>
-                    </span>
-                </span>
-                <span class="form-group">
-                    <label>*가입(목표)금액 :</label>
-                    <span class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="fix-width-33">*가입(목표)금액 :</label>
+                    <div class="form-control">
                         <input class="input-number" type="number" value="1"></input>
                         <label>만원부터</label>
                         <input class="input-number" type="number" value="100"></input>
                         <label>만원까지</label>
-                    </span>
-                </span>
-                <span class="form-group">
-                    <label>납입주기 :</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="fix-width-33">납입주기 :</label>
                     <input class="form-control" placeholder="월납">
                     </input>
-                </span>
-                <span class="form-group">
-                    <label>*적용이율 :</label>
-                    <span class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="fix-width-33">*적용이율 :</label>
+                    <div class="form-control">
                         <label>(최저)</label>
                         <input class="input-number" type="number" value="3.00" step="0.01"></input>
                         <label>% ~ (최대)</label>
                         <input class="input-number" type="number" value="7.00" step="0.01"></input>
                         <label>%</label>
-                    </span>
-                </span>
-                <span class="form-group">
-                    <label>*적용기간:</label>
-                    <span class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="fix-width-33">*적용기간:</label>
+                    <div class="form-control">
                         <input class="input-date" type="date" value="2024-01-12" ></input>
                         <label>부터</label>
                         <input class="input-date" type="date" value="2024-01-12"></input>
                         <label>까지 </label>
-                    </span>
-                </span>
-                <span class="form-group">
-                    <label>*이자과세 :</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="fix-width-33">*이자과세 :</label>
                     <input class="form-control" placeholder="일반과세">
                     </input>
-                </span>
-                <span class="form-group">
-                    <label>*판매상태 :</label>
+                </div>
+                <div class="form-group">
+                    <label class="fix-width-33">*판매상태 :</label>
                     <input class="form-control" placeholder="0. 정상(판매) 1. 판매준비 2. 판매인가 9. 판매중지">
                     </input>
-                </span>
-                <span class="form-group">
-                    <label>*판매기간: </label>
-                    <span class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="fix-width-33">*판매기간: </label>
+                    <div class="form-control">
                         <input class="input-date" type="date" value="2024-01-12" ></input>
                         <label>부터</label>
                         <input class="input-date" type="date" value="2024-01-12" "></input>
                         <label>까지</label>
-                    </span>
-                </span>
-                <span class="form-group">
+                    </div>
+                </div>
+                <div class="form-group flex-gap-5">
                     <button class="btn btn-blue flex-20">등록</button>
                     <button class="btn btn-blue flex-20">변경</button>
                     <button class="btn btn-blue flex-20">삭제</button>
                     <button class="btn btn-blue flex-20">신규</button>
-                </span>
-                <span class="form-group-right">
-                    <button class="btn btn-blue flex-23">종료</button>
-                </span>
+                </div>
+                <div class="form-group" style="position: relative;">
+                    <button class="btn btn-blue" style="width: 24%;top:10px;right: 0px;position:absolute">종료</button>
+                </div>
              </form>
         </div>
     </main>
