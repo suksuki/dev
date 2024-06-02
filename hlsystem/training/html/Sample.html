@@ -13,12 +13,12 @@
     <!-- Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <!-- Common Styles -->
-    <link rel="stylesheet" href="./css/portfolio.css" />
+    <link rel="stylesheet" href="css/portfolio.css" />
     <title>Sample For CSS</title>
 </head>
 
-<body class="flex-center">
-    <div id="app" class="flex-center">
+<body class="flex-wrap">
+    <div id="app" class="flex-wrap">
         <main class="modal" v-if="showModal">
             <header class="modal-header">
                 품정보관리
@@ -28,14 +28,14 @@
                 </button>
             </header>
             <div class="panel-body">
-                <form class="left-panel flex-50 flex-gap-5" aria-labelledby="product-info">
+                <form class="left-panel flex-40" aria-labelledby="product-info">
                     <div class="form-group">
                         <label class="fix-width-33" for="productName">상품명:</label>
                         <input id="productName" class="form-control" placeholder="우리사랑 행복 적금" type="text">
                     </div>
                     <div class="form-group flex-gap-5">
-                        <button class="btn btn-blue flex-50" type="button">조건 검색</button>
-                        <button class="btn btn-blue flex-50" type="button">전체 검색</button>
+                        <button class="btn btn-blue flex-40" type="button">조건 검색</button>
+                        <button class="btn btn-blue flex-40" type="button">전체 검색</button>
                     </div>
                     <table class="table" aria-label="Product List">
                         <thead>
@@ -61,7 +61,7 @@
                         </tbody>
                     </table>
                 </form>
-                <form class="right-panel flex-50 flex-gap-5" aria-labelledby="product-details">
+                <form class="right-panel flex-60" aria-labelledby="product-details">
                     <div class="form-group">
                         <label class="fix-width-33" for="productDetailName">*상품명:</label>
                         <input id="productDetailName" class="form-control" placeholder="우리사랑 행복적금" type="text"
@@ -146,14 +146,14 @@
                                 v-model="curItem.salesEndDate"> 까지
                         </div>
                     </div>
-                    <div class="form-group flex-gap-5">
+                    <div class="form-group flex-gap-5" style="border: 1px solid #0FF000;">
                         <button class="btn btn-blue flex-20" type="button" @click="addItem">新增</button>
                         <button class="btn btn-blue flex-20" type="button" @click="updateItem">修改</button>
                         <button class="btn btn-blue flex-20" type="button" @click="deleteItem">删除</button>
                         <button class="btn btn-blue flex-20" type="button" @click="clearItem">clear</button>
                     </div>
                     <div class="form-group" style="position: relative;">
-                        <button class="btn btn-blue" style="width: 24%; top: 10px; right: 0px; position: absolute"
+                        <button class="btn btn-blue" style="width: 20%; top: -10px; right: 5px; position: absolute"
                             type="button">종료</button>
                     </div>
                 </form>
