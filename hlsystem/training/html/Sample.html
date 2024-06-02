@@ -17,9 +17,9 @@
     <title>Sample For CSS</title>
 </head>
 
-<body class="flex-wrap">
-    <div id="app" class="flex-wrap">
-        <main class="modal" v-if="showModal">
+<body>
+    <div id="app" class="flex-100">
+        <main class="modal flex-100" v-if="showModal">
             <header class="modal-header">
                 품정보관리
                 <button class="btn btn-red close" @click="closeModal">
@@ -28,7 +28,7 @@
                 </button>
             </header>
             <div class="panel-body">
-                <form class="left-panel flex-40" aria-labelledby="product-info">
+                <form class="left-panel flex-40 flex-gap-5" aria-labelledby="product-info">
                     <div class="form-group">
                         <label class="fix-width-33" for="productName">상품명:</label>
                         <input id="productName" class="form-control" placeholder="우리사랑 행복 적금" type="text">
@@ -49,8 +49,7 @@
                             <tr v-for="item in items" :key="item.id">
                                 <td>
                                     <label class="form-control flex-center">
-                                        <input type="radio" name="radio-group" 
-                                            @click="changeItem(item)">
+                                        <input type="radio" name="radio-group" @click="changeItem(item)">
                                         <div class="radio-circle"></div>
                                     </label>
                                 </td>
@@ -61,7 +60,7 @@
                         </tbody>
                     </table>
                 </form>
-                <form class="right-panel flex-60" aria-labelledby="product-details">
+                <form class="right-panel flex-60 flex-gap-5" aria-labelledby="product-details">
                     <div class="form-group">
                         <label class="fix-width-33" for="productDetailName">*상품명:</label>
                         <input id="productDetailName" class="form-control" placeholder="우리사랑 행복적금" type="text"
@@ -86,20 +85,21 @@
                         <label class="fix-width-33" for="membershipPeriod">*가입(목표)기간:</label>
                         <div class="form-control">
                             <label for="minPeriod">(최소)</label>
-                            <input id="minPeriod" class="input-number" type="number" value="6"
-                                v-model="curItem.minPeriod"> 개월 ~
-                            <label for="maxPeriod">(최대)</label>
-                            <input id="maxPeriod" class="input-number" type="number" value="12"
-                                v-model="curItem.maxPeriod"> 개월
+                            <input id="minPeriod" type="number" value="6" v-model="curItem.minPeriod">
+                            <label for="maxPeriod">개월 ~(최대)</label>
+                            <input id="maxPeriod" type="number" value="12" v-model="curItem.maxPeriod">
+                            <label for="maxPeriod">개월</label>
+
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="fix-width-33" for="targetAmount">*가입(목표)금액:</label>
                         <div class="form-control">
-                            <input id="minAmount" class="input-number" type="number" value="1"
-                                v-model="curItem.minAmount"> 만원부터
-                            <input id="maxAmount" class="input-number" type="number" value="100"
-                                v-model="curItem.maxAmount"> 만원까지
+                            <input id="minAmount" type="number" value="1" v-model="curItem.minAmount">
+                            <label for="maxAmount">만원부터</label>
+                            <input id="maxAmount" type="number" value="100" v-model="curItem.maxAmount">
+                            <label for="maxAmount">만원까지</label>
+
                         </div>
                     </div>
                     <div class="form-group">
@@ -111,20 +111,22 @@
                         <label class="fix-width-33" for="interestRate">*적용이율:</label>
                         <div class="form-control">
                             <label for="minRate">(최저)</label>
-                            <input id="minRate" class="input-number" type="number" value="3.00" step="0.01"
-                                v-model="curItem.minRate"> % ~
-                            <label for="maxRate">(최대)</label>
-                            <input id="maxRate" class="input-number" type="number" value="7.00" step="0.01"
-                                v-model="curItem.maxRate"> %
+                            <input id="minRate" type="number" value="3.00" step="0.01"
+                                v-model="curItem.minRate"> 
+                            <label for="maxRate">% ~(최대)</label>
+                            <input id="maxRate" type="number" value="7.00" step="0.01"
+                                v-model="curItem.maxRate"> 
+                                <label for="maxRate">%</label>
+
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="fix-width-33" for="applicationPeriod">*적용기간:</label>
                         <div class="form-control">
-                            <input id="startDate" class="input-date" type="date" value="2024-01-12"
-                                v-model="curItem.startDate"> 부터
-                            <input id="endDate" class="input-date" type="date" value="2024-01-12"
-                                v-model="curItem.endDate"> 까지
+                            <input id="startDate" type="date" value="2024-01-12" v-model="curItem.startDate"> 
+                            <label > 부터</label>
+                            <input id="endDate" type="date" value="2024-01-12" v-model="curItem.endDate"> 
+                            <label >까지</label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -140,21 +142,25 @@
                     <div class="form-group">
                         <label class="fix-width-33" for="salesPeriod">*판매기간:</label>
                         <div class="form-control">
-                            <input id="salesStartDate" class="input-date" type="date" value="2024-01-12"
-                                v-model="curItem.salesStartDate"> 부터
-                            <input id="salesEndDate" class="input-date" type="date" value="2024-01-12"
-                                v-model="curItem.salesEndDate"> 까지
+                            <input id="salesStartDate" type="date" value="2024-01-12"
+                                v-model="curItem.salesStartDate"> 
+                                <label >부터</label>
+                      
+                                <input id="salesEndDate"type="date" value="2024-01-12"
+                                v-model="curItem.salesEndDate"> 
+                                <label >까지</label>
+
                         </div>
                     </div>
-                    <div class="form-group flex-gap-5" style="border: 1px solid #0FF000;">
-                        <button class="btn btn-blue flex-20" type="button" @click="addItem">新增</button>
-                        <button class="btn btn-blue flex-20" type="button" @click="updateItem">修改</button>
-                        <button class="btn btn-blue flex-20" type="button" @click="deleteItem">删除</button>
-                        <button class="btn btn-blue flex-20" type="button" @click="clearItem">clear</button>
+                    <div class="form-group flex-gap-5">
+                        <button class="btn btn-blue" type="button" @click="addItem">新增</button>
+                        <button class="btn btn-blue" type="button" @click="updateItem">修改</button>
+                        <button class="btn btn-blue" type="button" @click="deleteItem">删除</button>
+                        <button class="btn btn-blue" type="button" @click="clearItem">clear</button>
                     </div>
                     <div class="form-group" style="position: relative;">
-                        <button class="btn btn-blue" style="width: 20%; top: -10px; right: 5px; position: absolute"
-                            type="button">종료</button>
+                        <button class="btn btn-blue" style=" top: 0px; right: 0px; position: absolute"
+                            type="button">close</button>
                     </div>
                 </form>
             </div>
@@ -191,7 +197,7 @@
                         this.items.splice(index, 1);
                         console.log('Delete Item');
                     }
-                  },
+                },
                 clearItem() {
                     this.curItem = {};
                     console.log('Clear Item');
@@ -249,7 +255,7 @@
 
             },
 
-         },)
+        },)
 
     </script>
 </body>
