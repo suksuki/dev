@@ -12,211 +12,244 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <!-- Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-    <!-- 공통 스타일 -->
-    <link rel="stylesheet" href="./css/layout/portfolio.css" />
+    <!-- Common Styles -->
+    <link rel="stylesheet" href="./css/portfolio.css" />
     <title>Sample For CSS</title>
 </head>
 
 <body class="flex-center">
-    <main class="modal">
-        <div class="modal-header">
-            품정보관리
-            <button class="btn btn-red close">
-                <i class="fa fa-times"></i>
-            </button>
-        </div>
-        <div class="panel-body">
-            <form class="left-panel flex-50 flex-gap-5">
-                <div class="form-group">
-                    <label class="fix-width-33">상품명 : </label>
-                    <input class="form-control " placeholder="우리사랑 행복 적금">
-                    </input>
-                </div>
-                <div class="form-group flex-gap-5">
-                    <button class="btn btn-blue flex-50">조건 검색</button>
-                    <button class="btn btn-blue flex-50">전체 검색</button>
-                </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>판매상품명(상품코드)</th>
-                            <th>가입대상</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <label class="form-control flex-center">
-                                    <input type="radio" value="1" name="radio-group" checked="true" />
-                                    <div class="radio-circle"></div>
-                                </label>
-                            </td>
-                            <td>우리사랑 행복 적금(A1200) </td>
-                            <td>일반개인</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="form-control flex-center">
-                                    <input type="radio" value="2" name="radio-group" />
-                                    <div class="radio-circle"></div>
-                                </label>
-                            </td>
-                            <td>우리사랑 행복 적금(A1200)</td>
-                            <td>18세이상 개인</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="form-control flex-center">
-                                    <input type="radio" value="3" name="radio-group" />
-                                    <div class="radio-circle"></div>
-                                </label>
-                            </td>
-                            <td>우리사랑 행복 적금(A1200) </td>
-                            <td>20~35세 청년</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="form-control flex-center">
-                                    <input type="radio" value="4" name="radio-group" />
-                                    <div class="radio-circle"></div>
-                                </label>
-                            </td>
-                            <td>우리사랑 행복 적금(A1200) </td>
-                            <td>일반개인</td>
-                        </tr>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="form-control flex-center">
-                                    <input type="radio" value="5" name="radio-group" />
-                                    <div class="radio-circle"></div>
-                                </label>
-                            </td>
-                            <td>우리사랑 행복 적금(A1200) </td>
-                            <td>일반개인</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="form-control flex-center">
-                                    <input type="radio" value="6" name="radio-group" />
-                                    <div class="radio-circle"></div>
-                                </label>
-                            </td>
-                            <td>우리사랑 행복 적금(A1200) </td>
-                            <td>일반개인</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="form-control flex-center">
-                                    <input type="radio" value="7" name="radio-group" />
-                                    <div class="radio-circle"></div>
-                                </label>
-                            </td>
-                            <td>우리사랑 행복 적금(A1200) </td>
-                            <td>20~35세미만</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div id="app" class="flex-center">
+        <main class="modal" v-if="showModal">
+            <header class="modal-header">
+                품정보관리
+                <button class="btn btn-red close" @click="closeModal">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <span class="sr-only">Close</span>
+                </button>
+            </header>
+            <div class="panel-body">
+                <form class="left-panel flex-50 flex-gap-5" aria-labelledby="product-info">
+                    <div class="form-group">
+                        <label class="fix-width-33" for="productName">상품명:</label>
+                        <input id="productName" class="form-control" placeholder="우리사랑 행복 적금" type="text">
+                    </div>
+                    <div class="form-group flex-gap-5">
+                        <button class="btn btn-blue flex-50" type="button">조건 검색</button>
+                        <button class="btn btn-blue flex-50" type="button">전체 검색</button>
+                    </div>
+                    <table class="table" aria-label="Product List">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">판매상품명(상품코드)</th>
+                                <th scope="col">가입대상</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="item in items" :key="item.id">
+                                <td>
+                                    <label class="form-control flex-center">
+                                        <input type="radio" name="radio-group" 
+                                            @click="changeItem(item)">
+                                        <div class="radio-circle"></div>
+                                    </label>
+                                </td>
+                                <td>{{ item.productName }}</td>
+                                <td>{{ item.targetAudience }}</td>
+                            </tr>
 
-            </form>
-            <form class="right-panel flex-50 flex-gap-5">
-                <div class="form-group">
-                    <label class="fix-width-33">*상품명 :</label>
-                    <input class="form-control" placeholder="우리사랑 행복적금">
-                    </input>
-                </div>
-                <div class="form-group">
-                    <label class="fix-width-33">*상품코드 :</label>
-                    <input class="form-control" placeholder="A1200">
-                    </input>
-                </div>
-                <div class="form-group">
-                    <label class="fix-width-33">*상품유형: </label>
-                    <input class="form-control" placeholder="적금">
-                    </input>
-                </div>
-                <div class="form-group">
-                    <label class="fix-width-33">*가입대상 : </label>
-                    <input class="form-control" placeholder="일반개인">
-                    </input>
-                </div>
-                <div class="form-group">
-                    <label class="fix-width-33">*가입(목표)기간: </label>
-                    <div class="form-control">
-                        <label>(최소)</label>
-                        <input class="input-number" type="number" value="6"></input>
-                        <label>개월 ~ (최대)</label>
-                        <input class="input-number" type="number" value="12"></input>
-                        <label>개월</label>
+                        </tbody>
+                    </table>
+                </form>
+                <form class="right-panel flex-50 flex-gap-5" aria-labelledby="product-details">
+                    <div class="form-group">
+                        <label class="fix-width-33" for="productDetailName">*상품명:</label>
+                        <input id="productDetailName" class="form-control" placeholder="우리사랑 행복적금" type="text"
+                            v-model="curItem.productDetailName">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="fix-width-33">*가입(목표)금액 :</label>
-                    <div class="form-control">
-                        <input class="input-number" type="number" value="1"></input>
-                        <label>만원부터</label>
-                        <input class="input-number" type="number" value="100"></input>
-                        <label>만원까지</label>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="productCode">*상품코드:</label>
+                        <input id="productCode" class="form-control" placeholder="A1200" type="text"
+                            v-model="curItem.productCode">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="fix-width-33">납입주기 :</label>
-                    <input class="form-control" placeholder="월납">
-                    </input>
-                </div>
-                <div class="form-group">
-                    <label class="fix-width-33">*적용이율 :</label>
-                    <div class="form-control">
-                        <label>(최저)</label>
-                        <input class="input-number" type="number" value="3.00" step="0.01"></input>
-                        <label>% ~ (최대)</label>
-                        <input class="input-number" type="number" value="7.00" step="0.01"></input>
-                        <label>%</label>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="productType">*상품유형:</label>
+                        <input id="productType" class="form-control" placeholder="적금" type="text"
+                            v-model="curItem.productType">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="fix-width-33">*적용기간:</label>
-                    <div class="form-control">
-                        <input class="input-date" type="date" value="2024-01-12"></input>
-                        <label>부터</label>
-                        <input class="input-date" type="date" value="2024-01-12"></input>
-                        <label>까지 </label>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="targetAudience">*가입대상:</label>
+                        <input id="targetAudience" class="form-control" placeholder="일반개인" type="text"
+                            v-model="curItem.targetAudience">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="fix-width-33">*이자과세 :</label>
-                    <input class="form-control" placeholder="일반과세">
-                    </input>
-                </div>
-                <div class="form-group">
-                    <label class="fix-width-33">*판매상태 :</label>
-                    <input class="form-control" placeholder="0. 정상(판매) 1. 판매준비 2. 판매인가 9. 판매중지">
-                    </input>
-                </div>
-                <div class="form-group">
-                    <label class="fix-width-33">*판매기간: </label>
-                    <div class="form-control">
-                        <input class="input-date" type="date" value="2024-01-12"></input>
-                        <label>부터</label>
-                        <input class="input-date" type="date" value="2024-01-12" "></input>
-                        <label>까지</label>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="membershipPeriod">*가입(목표)기간:</label>
+                        <div class="form-control">
+                            <label for="minPeriod">(최소)</label>
+                            <input id="minPeriod" class="input-number" type="number" value="6"
+                                v-model="curItem.minPeriod"> 개월 ~
+                            <label for="maxPeriod">(최대)</label>
+                            <input id="maxPeriod" class="input-number" type="number" value="12"
+                                v-model="curItem.maxPeriod"> 개월
+                        </div>
                     </div>
-                </div>
-                <div class=" form-group flex-gap-5">
-                        <button class="btn btn-blue flex-20">등록</button>
-                        <button class="btn btn-blue flex-20">변경</button>
-                        <button class="btn btn-blue flex-20">삭제</button>
-                        <button class="btn btn-blue flex-20">신규</button>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="targetAmount">*가입(목표)금액:</label>
+                        <div class="form-control">
+                            <input id="minAmount" class="input-number" type="number" value="1"
+                                v-model="curItem.minAmount"> 만원부터
+                            <input id="maxAmount" class="input-number" type="number" value="100"
+                                v-model="curItem.maxAmount"> 만원까지
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="paymentFrequency">납입주기:</label>
+                        <input id="paymentFrequency" class="form-control" placeholder="월납" type="text"
+                            v-model="curItem.paymentFrequency">
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="interestRate">*적용이율:</label>
+                        <div class="form-control">
+                            <label for="minRate">(최저)</label>
+                            <input id="minRate" class="input-number" type="number" value="3.00" step="0.01"
+                                v-model="curItem.minRate"> % ~
+                            <label for="maxRate">(최대)</label>
+                            <input id="maxRate" class="input-number" type="number" value="7.00" step="0.01"
+                                v-model="curItem.maxRate"> %
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="applicationPeriod">*적용기간:</label>
+                        <div class="form-control">
+                            <input id="startDate" class="input-date" type="date" value="2024-01-12"
+                                v-model="curItem.startDate"> 부터
+                            <input id="endDate" class="input-date" type="date" value="2024-01-12"
+                                v-model="curItem.endDate"> 까지
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="taxType">*이자과세:</label>
+                        <input id="taxType" class="form-control" placeholder="일반과세" type="text"
+                            v-model="curItem.taxType">
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="salesStatus">*판매상태:</label>
+                        <input id="salesStatus" class="form-control" placeholder="0. 정상(판매) 1. 판매준비 2. 판매인가 9. 판매중지"
+                            type="text" v-model="curItem.salesStatus">
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="salesPeriod">*판매기간:</label>
+                        <div class="form-control">
+                            <input id="salesStartDate" class="input-date" type="date" value="2024-01-12"
+                                v-model="curItem.salesStartDate"> 부터
+                            <input id="salesEndDate" class="input-date" type="date" value="2024-01-12"
+                                v-model="curItem.salesEndDate"> 까지
+                        </div>
+                    </div>
+                    <div class="form-group flex-gap-5">
+                        <button class="btn btn-blue flex-20" type="button" @click="addItem">新增</button>
+                        <button class="btn btn-blue flex-20" type="button" @click="updateItem">修改</button>
+                        <button class="btn btn-blue flex-20" type="button" @click="deleteItem">删除</button>
+                        <button class="btn btn-blue flex-20" type="button" @click="clearItem">clear</button>
                     </div>
                     <div class="form-group" style="position: relative;">
-                        <button class="btn btn-blue"
-                            style="width: 24%;top:10px;right: 0px;position:absolute">종료</button>
+                        <button class="btn btn-blue" style="width: 24%; top: 10px; right: 0px; position: absolute"
+                            type="button">종료</button>
                     </div>
-            </form>
-        </div>
-    </main>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                showModal: true,
+                items: [],
+                curItem: {},
+            },
+            methods: {
+                closeModal() {
+                    this.showModal = false;
+                },
+                changeItem(item) {
+                    this.curItem = item;
+                },
+                addItem() {
+                    this.items.push(this.curItem);
+                    console.log('Add Item');
+                },
+                updateItem() {
+                    console.log('Update Item');
+                },
+                deleteItem() {
+                    const index = this.items.findIndex(item => item.id === this.curItem.id);
+                    if (index !== -1) {
+                        this.items.splice(index, 1);
+                        console.log('Delete Item');
+                    }
+                  },
+                clearItem() {
+                    this.curItem = {};
+                    console.log('Clear Item');
+                }
+            },
+            mounted() {
+                // Vue initialization code goes here
+                this.curItem = {
+                    id: 1,
+                    productName: '우리사랑 행복 적금',
+                    targetAudience: '일반개인',
+                    productDetailName: '',
+                    productCode: '',
+                    productType: '',
+                    targetAudience: '',
+                    minPeriod: 6,
+                    maxPeriod: 13,
+                    minAmount: 1,
+                    maxAmount: 100,
+                    paymentFrequency: '',
+                    minRate: 3.00,
+                    maxRate: 7.00,
+                    startDate: '2024-01-12',
+                    endDate: '2024-01-12',
+                    taxType: '',
+                    salesStatus: '',
+                    salesStartDate: '2024-01-12',
+                    salesEndDate: '2024-01-12',
+                };
+                for (let i = 0; i < 10; i++) {
+                    //alert('test');
+                    this.items.push({
+                        id: i + 1,
+                        productName: Math.random().toString(36).substring(7),
+                        targetAudience: Math.random().toString(36).substring(7),
+                        productDetailName: Math.random().toString(36).substring(7),
+                        productCode: Math.random().toString(36).substring(7),
+                        productType: Math.random().toString(36).substring(7),
+                        targetAudience: Math.random().toString(36).substring(7),
+                        minPeriod: Math.floor(Math.random() * 10) + 1,
+                        maxPeriod: Math.floor(Math.random() * 10) + 1,
+                        minAmount: Math.floor(Math.random() * 100) + 1,
+                        maxAmount: Math.floor(Math.random() * 100) + 1,
+                        paymentFrequency: Math.random().toString(36).substring(7),
+                        minRate: Math.random() * (7.00 - 3.00) + 3.00,
+                        maxRate: Math.random() * (7.00 - 3.00) + 3.00,
+                        startDate: '2024-01-12',
+                        endDate: '2024-01-12',
+                        taxType: Math.random().toString(36).substring(7),
+                        salesStatus: Math.random().toString(36).substring(7),
+                        salesStartDate: '2024-01-12',
+                        salesEndDate: '2024-01-12',
+                    });
+                }
+
+            },
+
+         },)
 
     </script>
 </body>
