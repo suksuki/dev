@@ -1,31 +1,142 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <!-- Imported styles on this page -->
+    <link rel="stylesheet" href="/static_resources/system/js/datatables/datatables.css">
+    <link rel="stylesheet" href="/static_resources/system/js/select2/select2-bootstrap.css">
+    <link rel="stylesheet" href="/static_resources/system/js/select2/select2.css">
+    <title>관리자시스템</title>
     <style>
-        .bar {
-            fill: steelblue;
+        .dt-buttons {
+            padding-top: 15px;
         }
-        .bar:hover {
-            fill: orange;
+        .btn-icon.icon-left {
+            margin-left: 5px;
         }
-        .axis-label {
-            font: 10px sans-serif;
+        .modal {
+            display: block; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .user-details {
+            margin-left: 20px;
         }
     </style>
 </head>
-<body>
-    <!-- SVG容器 -->
-    <svg width="500" height="300">
-        <!-- 直方图的柱子 -->
-        <rect class="bar" x="10" y="50" width="50" height="200"></rect>
-        <rect class="bar" x="70" y="100" width="50" height="150"></rect>
-        <rect class="bar" x="130" y="150" width="50" height="100"></rect>
-        <!-- 坐标轴和标签 -->
-        <g class="axis-label">
-            <text x="25" y="270">1月</text>
-            <text x="85" y="270">2月</text>
-            <text x="145" y="270">3月</text>
-        </g>
-    </svg>
+<body class="page-body">
+<div class="page-container">
+    <div class="main-content">
+        <ol class="breadcrumb bc-3">
+            <li><a href="#none" onclick="cf_movePage('/system')"><i class="fa fa-home"></i>Home</a></li>
+            <li class="active"><strong>사용자 관리</strong></li>
+        </ol>
+        <h2>사용자 목록</h2>
+        <br />
+        <div id="vueapp">
+            <div class="dt-buttons" style="padding-top: 15px;">
+                <button type="button" class="btn btn-orange btn-icon icon-left btn-small" @click="showAddUserModal">
+                    추가<i class="entypo-plus"></i>
+                </button>
+                <button type="button" class="btn btn-primary btn-icon icon-left btn-small" @click="excelDn">
+                    EXCEL<i class="entypo-download"></i>
+                </button>
+            </div>
+            <div class="dataTables_filter">
+                <select id="search_nm" v-model="search_nm">
+                    <option value="name">사용자명</option>
+                    <option value="user_id">아이디</option>
+                </select>
+                <input type="search" placeholder="" style="width: 120px;" v-model="search_val" @keyup.enter="getList(true)">
+                <button type="button" class="btn btn-blue btn-icon icon-left" style="margin-left: 5px;" @click="getList(true)">
+                    검색
+                    <i class="entypo-search"></i>
+                </button>
+            </div>
+            <div style="display: flex;">
+                <table class="table table-bordered datatable dataTable" style="flex: 1;">
+                    <thead>
+                        <tr class="replace-inputs">
+                            <th style="width: 5%;" class="center"></th>
+                            <th style="width: 5%;" class="center">번호</th>
+                            <th style="width: 18%;" class="center sorting" @click="sortList('name')">사용자명</th>
+                            <th style="width: 23%;" class="center sorting" @click="sortList('user_id')">아이디</th>
+                            <th style="width: 15%;" class="center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(user, index) in filteredUsers" :key="user.id">
+                            <td class="center"><input type="radio" name="selectedUser" @click="selectUser(user)"></td>
+                            <td class="center">{{ index + 1 }}</td>
+                            <td class="center">{{ user.name }}</td>
+                            <td class="center">{{ user.user_id }}</td>
+                            <td class="center">
+                                <button class="btn btn-info btn-sm" @click="showEditUserModal(user)">编辑</button>
+                                <button class="btn btn-danger btn-sm" @click="deleteUser(user.id)">删除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="user-details" style="flex: 1; padding: 10px; border-left: 1px solid #ddd;">
+                    <h3>用户详细信息</h3>
+                    <div v-if="selectedUser">
+                        <form>
+                            <div v-for="(value, key) in selectedUser" :key="key" style="margin-bottom: 10px;">
+                                <label :for="key"><strong>{{ key }}:</strong></label>
+                                <input type="text" :id="key" :value="value" readonly>
+                            </div>
+                        </form>
+                    </div>
+                    <div v-else>
+                        <p>请选择一个用户查看详细信息</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add/Edit User Modal -->
+            <div v-if="showModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" @click="closeModal">&times;</span>
+                    <h2>{{ isEdit ? '编辑用户' : '添加用户' }}</h2>
+                    <form @submit.prevent="isEdit ? updateUser() : addUser()">
+                        <label for="name">用户名:</label>
+                        <input type="text" id="name" v-model="form.name" required>
+                        <label for="user_id">用户ID:</label>
+                        <input type="text" id="user_id" v-model="form.user_id" required>
+                        <button type="submit" class="btn btn-success">{{ isEdit ? '更新' : '添加' }}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static_resources/system/js/vue.js"></script>
+<script src="/static_resources/system/js/custom.js"></script> <!-- External JS -->
 </body>
 </html>

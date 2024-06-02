@@ -1,9 +1,6 @@
-/* 占쏙옙占쏙옙 占쏙옙占쏙옙 */
 :root {
-    /* 占쏙옙占쏙옙 */
     --wrapper-padding: 10px;
     --default-flex-gap: 10px;
-    /* 占쏙옙占쏙옙 */
     --white-100: rgb(255, 255, 255);
     --gray-100: rgb(240, 240, 240);
     --gray-200: rgb(212, 212, 212);
@@ -24,7 +21,6 @@
     --orange-100: rgb(233, 112, 52);
 }
 
-/* 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙타占쏙옙 */
 body {
     width: 100%;
     height: 100%;
@@ -34,59 +30,236 @@ body {
     font-weight: normal;
     font-style: normal;
 }
-.text-center { text-align: center; }
-/* Flex 占쏙옙타占쏙옙 */
-.flex {display: flex};
-.flex-right {justify-content: flex-end;};
-.flex-center { justify-items:  center; justify-content:space-between; }
-.flex-column { display: flex; flex-direction: column;}
-.flex-wrap { flex-wrap: wrap; border: 1px solid #999999; }
-.align-items-center { align-items: center; }
-.justify-content-center { justify-content: center; }
-.flex-10 { flex: 1 1 calc(10% - 6px); }
-.flex-16 { flex: 1 1 calc(16% - 6px); }
-.flex-20 { flex: 1 1 calc(20% - 6px); }
-.flex-33 { flex: 1 1 calc(33.3% - 6px); }
-.flex-40 { flex: 1 1 calc(40% - 6px); }
-.flex-50 { flex: 1 1 calc(50% - 6px); }
-.flex-66 { flex: 1 1 calc(66.6% - 6px); }
-.flex-80 { flex: 1 1 calc(80% - 6px); }
-.flex-100 { flex: 1 1 calc(100% - 6px); }
-.flex-gap-5 { gap: 5px; }
-.flex-gap-10 { gap: 10px; }
-.flex-gap-20 { gap: 20px; }
-.flex-padding-10 {padding: 10px;}
-.flex-margin-10 {margin: 10px;}
-/* 占쏙옙튼 */
-.btn { padding: 4px 12px; border: 1px solid var(--black-100); cursor: pointer; }
-.btn.btn-default { background: var(--white-100); color: var(--black-100); }
-.btn.btn-skyblue { background: var(--blue-500); color: var(--black-100); }
-.btn.btn-blue { background: var(--blue-100); color: var(--white-100); }
-.btn.btn-navy { background: var(--blue-300); color: var(--white-100); }
-.btn.btn-red { background: var(--red-100); color: var(--white-100); }
-.btn.btn-gray { background: var(--gray-300); color: var(--white-100); }
-.btn.btn-peach { background: var(--peach-100); color: var(--black-100); }
-.btn.btn-transparent { background: transparent; color: var(--black-100); }
-.btn.btn-orange { background: var(--orange-100); color: var(--white-100); }
 
-/*---*/
-.width-fix-100 {width:100px;}
+.text-center {
+    text-align: center;
+}
+
+/* Flexbox */
+.flex {
+    display: flex;
+}
+
+.flex-right {
+    justify-content: flex-end;
+}
+
+.flex-center {
+    justify-content: space-between;
+    justify-items: center;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+    border: 1px solid #999999;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.flex-10,
+.flex-16,
+.flex-20,
+.flex-33,
+.flex-40,
+.flex-50,
+.flex-66,
+.flex-80,
+.flex-100 {
+    flex: 1 1 calc(var(--width-percentage, 100%) - 6px);
+}
+
+.flex-10 {
+    --width-percentage: 10%;
+}
+
+.flex-16 {
+    --width-percentage: 16%;
+}
+
+.flex-20 {
+    --width-percentage: 20%;
+}
+
+.flex-33 {
+    --width-percentage: 33.3%;
+}
+
+.flex-40 {
+    --width-percentage: 40%;
+}
+
+.flex-50 {
+    --width-percentage: 50%;
+}
+
+.flex-66 {
+    --width-percentage: 66.6%;
+}
+
+.flex-80 {
+    --width-percentage: 80%;
+}
+
+.flex-100 {
+    --width-percentage: 100%;
+}
+
+.flex-gap-5 {
+    gap: 5px;
+}
+
+.flex-gap-10 {
+    gap: 10px;
+}
+
+.flex-gap-20 {
+    gap: 20px;
+}
+
+.flex-padding-10 {
+    padding: 10px;
+}
+
+.flex-margin-10 {
+    margin: 10px;
+}
+
+/* Buttons */
+.btn {
+    padding: 4px 12px;
+    border: 1px solid var(--black-100);
+    cursor: pointer;
+}
+
+.btn-default {
+    background: var(--white-100);
+    color: var(--black-100);
+}
+
+.btn-skyblue {
+    background: var(--blue-500);
+    color: var(--black-100);
+}
+
+.btn-blue {
+    background: var(--blue-100);
+    color: var(--white-100);
+}
+
+.btn-navy {
+    background: var(--blue-300);
+    color: var(--white-100);
+}
+
+.btn-red {
+    background: var(--red-100);
+    color: var(--white-100);
+}
+
+.btn-gray {
+    background: var(--gray-300);
+    color: var(--white-100);
+}
+
+.btn-peach {
+    background: var(--peach-100);
+    color: var(--black-100);
+}
+
+.btn-transparent {
+    background: transparent;
+    color: var(--black-100);
+}
+
+.btn-orange {
+    background: var(--orange-100);
+    color: var(--white-100);
+}
+
+/* Width Fix */
+.width-fix-100 {
+    width: 100px;
+}
+
 /* Form */
-.form-group { display: flex; align-items: center; justify-content: center; width: 100%;border: 1px solid #333333;}
-.form-group label {height:30px; font-weight: bold; text-align: right;margin-right: 10px;background-color: #EEEEEE;}
-.form-group input { height: 30px; border: 1px solid var(--gray-200); margin-left:10px}
-.form-group select { flex: 1; height: 36px; border: 1px solid var(--gray-200);  }
+.form-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border: 1px solid #333333;
+}
 
-.form-control { flex: 1; width: 100%; }
+.form-group label {
+    height: 30px;
+    font-weight: bold;
+    text-align: right;
+    margin-right: 10px;
+    background-color: #EEEEEE;
+}
 
-input.form-control {height:30px;  background: var(--gray-100); }
-input.form-control[disabled] { background: var(--gray-100); }
-label.form-control {height:30px; font-weight: bold; }
-textarea.form-control[disabled] { background: var(--gray-100); padding: 4px 8px; }
-select.form-control { height: 36px; }
-/*** fix width of percentage**/
-.fix-width-33 {width: 33%;}
-.panel-body {display: flex;}
-.left-panel{gap: 10px;display: flex;flex-direction: column;border: 1px solid #999999;margin: 10px;padding: 5px;}
+.form-group input,
+.form-group select {
+    height: 30px;
+    border: 1px solid var(--gray-200);
+    margin-left: 10px;
+}
 
-.right-panel{gap: 10px;display: flex;flex-direction: column;border: 1px solid #999999;margin: 10px;padding: 5px;}
+.form-group select {
+    height: 36px;
+    flex: 1;
+}
+
+.form-control {
+    flex: 1;
+    width: 100%;
+}
+
+input.form-control,
+input.form-control[disabled],
+textarea.form-control[disabled] {
+    background: var(--gray-100);
+    height: 30px;
+}
+
+textarea.form-control[disabled] {
+    padding: 4px 8px;
+}
+
+label.form-control {
+    height: 30px;
+    font-weight: bold;
+}
+
+select.form-control {
+    height: 36px;
+}
+
+.fix-width-33 {
+    width: 33%;
+}
+
+/* Panels */
+.panel-body {
+    display: flex;
+}
+
+.left-panel,
+.right-panel {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #999999;
+    margin: 10px;
+    padding: 5px;
+}

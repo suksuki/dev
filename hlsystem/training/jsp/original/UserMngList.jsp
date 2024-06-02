@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:include page="/WEB-INF/jsp/kcg/_include/system/header_meta.jsp" flush="false"/>
+	<meta charset="UTF-8">
 	<!-- Imported styles on this page -->
 	<link rel="stylesheet" href="/static_resources/system/js/datatables/datatables.css">
 	<link rel="stylesheet" href="/static_resources/system/js/select2/select2-bootstrap.css">
@@ -14,12 +12,8 @@
 
 <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
 
-	<jsp:include page="/WEB-INF/jsp/kcg/_include/system/sidebar-menu.jsp" flush="false"/>
-
 	<div class="main-content">
 
-		<jsp:include page="/WEB-INF/jsp/kcg/_include/system/header.jsp" flush="false"/>
-		
 		<ol class="breadcrumb bc-3">
 			<li><a href="#none" onclick="cf_movePage('/system')"><i class="fa fa-home"></i>Home</a></li>
 			<li class="active"><strong>사용자 관리</strong></li>
@@ -79,17 +73,35 @@
 		</template>
 		</div>
 		
-		<jsp:include page="/WEB-INF/jsp/kcg/_include/system/footer.jsp" flush="false"/>
-		
 	</div>
 
 </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
 var vueapp = new Vue({
 	el : "#vueapp",
 	data : {
-		dataList : [],
+		dataList : [
+			{
+				rownum: 1,
+				name: "John Doe",
+				jikgub_nm: "Manager",
+				user_id: "johndoe123",
+				statusnm: "Active",
+				auth_nm: "Admin",
+				reg_dt_char: "2022-01-01"
+			},
+			{
+				rownum: 2,
+				name: "Jane Smith",
+				jikgub_nm: "Supervisor",
+				user_id: "janesmith456",
+				statusnm: "Inactive",
+				auth_nm: "User",
+				reg_dt_char: "2022-02-01"
+			}
+		],
 		search_nm : "name",
 		search_val : "",
 	},
@@ -100,9 +112,9 @@ var vueapp = new Vue({
 			cv_pagingConfig.pageNo = pagingConfig.pageNo;
 			cv_pagingConfig.orders = pagingConfig.orders;
 			
-	 		var params = cv_sessionStorage.getItem("params");
-	 		this.search_nm = params.search_nm;
-	 		this.search_val = params.search_val;
+			var params = cv_sessionStorage.getItem("params");
+			this.search_nm = params.search_nm;
+			this.search_val = params.search_val;
 
 			this.getList();
 		} else {
