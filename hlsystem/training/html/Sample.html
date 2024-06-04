@@ -111,22 +111,20 @@
                         <label class="fix-width-33" for="interestRate">*적용이율:</label>
                         <div class="form-control">
                             <label for="minRate">(최저)</label>
-                            <input id="minRate" type="number" value="3.00" step="0.01"
-                                v-model="curItem.minRate"> 
+                            <input id="minRate" type="number" value="3.00" step="0.01" v-model="curItem.minRate">
                             <label for="maxRate">% ~(최대)</label>
-                            <input id="maxRate" type="number" value="7.00" step="0.01"
-                                v-model="curItem.maxRate"> 
-                                <label for="maxRate">%</label>
+                            <input id="maxRate" type="number" value="7.00" step="0.01" v-model="curItem.maxRate">
+                            <label for="maxRate">%</label>
 
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="fix-width-33" for="applicationPeriod">*적용기간:</label>
                         <div class="form-control">
-                            <input id="startDate" type="date" value="2024-01-12" v-model="curItem.startDate"> 
-                            <label > 부터</label>
-                            <input id="endDate" type="date" value="2024-01-12" v-model="curItem.endDate"> 
-                            <label >까지</label>
+                            <input id="startDate" type="date" value="2024-01-12" v-model="curItem.startDate">
+                            <label> 부터</label>
+                            <input id="endDate" type="date" value="2024-01-12" v-model="curItem.endDate">
+                            <label>까지</label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -142,26 +140,22 @@
                     <div class="form-group">
                         <label class="fix-width-33" for="salesPeriod">*판매기간:</label>
                         <div class="form-control">
-                            <input id="salesStartDate" type="date" value="2024-01-12"
-                                v-model="curItem.salesStartDate"> 
-                                <label >부터</label>
-                      
-                                <input id="salesEndDate"type="date" value="2024-01-12"
-                                v-model="curItem.salesEndDate"> 
-                                <label >까지</label>
+                            <input id="salesStartDate" type="date" value="2024-01-12" v-model="curItem.salesStartDate">
+                            <label>부터</label>
+
+                            <input id="salesEndDate" type="date" value="2024-01-12" v-model="curItem.salesEndDate">
+                            <label>까지</label>
 
                         </div>
                     </div>
                     <div class="form-group flex-gap-5">
-                        <button class="btn btn-blue" type="button" @click="addItem">新增</button>
-                        <button class="btn btn-blue" type="button" @click="updateItem">修改</button>
-                        <button class="btn btn-blue" type="button" @click="deleteItem">删除</button>
-                        <button class="btn btn-blue" type="button" @click="clearItem">clear</button>
+                        <button class="btn btn-blue flex-40" type="button" @click="addItem">新增</button>
+                        <button class="btn btn-blue flex-40" type="button" @click="updateItem">修改</button>
+                        <button class="btn btn-blue flex-40" type="button" @click="deleteItem">删除</button>
+                        <button class="btn btn-blue flex-40" type="button" @click="clearItem">clear</button>
+                        <button class="btn btn-blue flex-100" type="button">close</button>
                     </div>
-                    <div class="form-group" style="position: relative;">
-                        <button class="btn btn-blue" style=" top: 0px; right: 0px; position: absolute"
-                            type="button">close</button>
-                    </div>
+
                 </form>
             </div>
         </main>
@@ -170,6 +164,7 @@
     <!-- Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
+
         const app = new Vue({
             el: '#app',
             data: {
@@ -205,6 +200,9 @@
             },
             mounted() {
                 // Vue initialization code goes here
+
+
+
                 this.curItem = {
                     id: 1,
                     productName: '우리사랑 행복 적금',
@@ -227,29 +225,29 @@
                     salesStartDate: '2024-01-12',
                     salesEndDate: '2024-01-12',
                 };
+                // Generate fake data
                 for (let i = 0; i < 10; i++) {
-                    //alert('test');
                     this.items.push({
                         id: i + 1,
-                        productName: Math.random().toString(36).substring(7),
-                        targetAudience: Math.random().toString(36).substring(7),
-                        productDetailName: Math.random().toString(36).substring(7),
-                        productCode: Math.random().toString(36).substring(7),
-                        productType: Math.random().toString(36).substring(7),
-                        targetAudience: Math.random().toString(36).substring(7),
-                        minPeriod: Math.floor(Math.random() * 10) + 1,
-                        maxPeriod: Math.floor(Math.random() * 10) + 1,
-                        minAmount: Math.floor(Math.random() * 100) + 1,
-                        maxAmount: Math.floor(Math.random() * 100) + 1,
-                        paymentFrequency: Math.random().toString(36).substring(7),
-                        minRate: Math.random() * (7.00 - 3.00) + 3.00,
-                        maxRate: Math.random() * (7.00 - 3.00) + 3.00,
-                        startDate: '2024-01-12',
-                        endDate: '2024-01-12',
-                        taxType: Math.random().toString(36).substring(7),
-                        salesStatus: Math.random().toString(36).substring(7),
-                        salesStartDate: '2024-01-12',
-                        salesEndDate: '2024-01-12',
+                        productName: faker.commerce.productName(),
+                        targetAudience: faker.random.word(),
+                        productDetailName: faker.commerce.product(),
+                        productCode: faker.random.alphaNumeric(6),
+                        productType: faker.random.word(),
+                        targetAudience: faker.random.word(),
+                        minPeriod: faker.random.number({ min: 1, max: 10 }),
+                        maxPeriod: faker.random.number({ min: 1, max: 10 }),
+                        minAmount: faker.random.number({ min: 1, max: 100 }),
+                        maxAmount: faker.random.number({ min: 1, max: 100 }),
+                        paymentFrequency: faker.random.word(),
+                        minRate: faker.random.number({ min: 3, max: 7, precision: 0.01 }),
+                        maxRate: faker.random.number({ min: 3, max: 7, precision: 0.01 }),
+                        startDate: faker.date.future().toISOString().split('T')[0],
+                        endDate: faker.date.future().toISOString().split('T')[0],
+                        taxType: faker.random.word(),
+                        salesStatus: faker.random.word(),
+                        salesStartDate: faker.date.future().toISOString().split('T')[0],
+                        salesEndDate: faker.date.future().toISOString().split('T')[0],
                     });
                 }
 
