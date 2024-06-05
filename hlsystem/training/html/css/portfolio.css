@@ -1,4 +1,5 @@
 :root {
+    /* Variables */
     --wrapper-padding: 10px;
     --default-flex-gap: 10px;
     --white: #fff;
@@ -22,41 +23,48 @@ body {
 }
 
 .text-center {
+    /* Center align text */
     text-align: center;
 }
 
-/* Flexbox */
+/* Flexbox utilities */
 .flex {
     display: flex;
- 
 }
 
 .flex-right {
+    /* Align items to the right */
     justify-content: flex-end;
 }
 
 .flex-center {
+    /* Center align items */
     justify-content: center;
     align-items: center;
 }
 
 .flex-column {
+    /* Arrange items in a column */
     flex-direction: column;
 }
 
 .flex-wrap {
+    /* Wrap flex items */
     flex-wrap: wrap;
     border: 1px solid #FF0000;
 }
 
 .align-items-center {
+    /* Center align items vertically */
     align-items: center;
 }
 
 .justify-content-center {
+    /* Center align items horizontally */
     justify-content: center;
 }
 
+/* Flexbox sizes */
 .flex-10 {
     flex: 1 1 10%;
 }
@@ -97,135 +105,151 @@ body {
     flex: 1 1 100%;
 }
 
+/* Flexbox gaps */
 .flex-gap-5 {
+    /* Gap of 5px between flex items */
     gap: 5px;
 }
 
 .flex-gap-10 {
+    /* Gap of 10px between flex items */
     gap: 10px;
 }
 
 .flex-gap-20 {
+    /* Gap of 20px between flex items */
     gap: 20px;
 }
 
+/* Flexbox padding */
 .flex-padding-10 {
+    /* Padding of 10px for flex items */
     padding: 10px;
 }
 
+/* Flexbox margin */
 .flex-margin-10 {
+    /* Margin of 10px for flex items */
     margin: 10px;
 }
 
 /* Buttons */
 .btn {
+    /* Common button styles */
     padding: 4px 12px;
     border: 1px solid var(--black);
     cursor: pointer;
 }
 
 .btn-default {
+    /* Default button style */
     background: var(--white);
     color: var(--black);
 }
 
 .btn-blue {
+    /* Blue button style */
     background: var(--blue-light);
     color: var(--white);
 }
 
 .btn-red {
+    /* Red button style */
     background: var(--red);
     color: var(--white);
 }
 
 .btn-gray {
+    /* Gray button style */
     background: var(--gray-dark);
     color: var(--white);
 }
 
 .btn-peach {
+    /* Peach button style */
     background: var(--peach);
     color: var(--black);
 }
 
 .btn-orange {
+    /* Orange button style */
     background: var(--orange);
     color: var(--white);
 }
 
 .btn-transparent {
+    /* Transparent button style */
     background: transparent;
     color: var(--black);
 }
 
 .width-fix-100 {
+    /* Fixed width of 100px */
     width: 100px;
 }
 
 /* Form */
 .form-group {
+    /* Form group container */
     display: flex;
     width: 100%;
     gap: 5px;
     justify-content: space-between;
- }
+}
 
 .form-group label {
+    /* Form group label */
     height: 30px;
     font-weight: bold;
     text-align: right;
     margin-right: 5px;
     margin-top: 10px;
-
- 
-
 }
 
 .form-group input,
 .form-group select {
+    /* Form group input and select */
     height: 30px;
     border: 1px solid var(--gray-medium);
-    flex:1 1 1;
- 
+    flex: 1 1;
 }
 
-
-
 .form-control {
+    /* Form control container */
     flex: 1;
     width: 100%;
     display: flex;
-
 }
-
 
 .form-control label {
-
-    font-weight:normal;
+    /* Form control label */
+    font-weight: normal;
     font-size: smaller;
-    text-align:right;
-
+    text-align: right;
 }
+
 .form-control input,
 .form-control select {
+    /* Form control input and select */
     margin-right: 5px;
-    width:80px;
-
+    width: 80px;
 }
 
 .fix-width-33 {
+    /* Fixed width of 33% */
     width: 23%;
 }
 
 /* Panels */
 .panel-body {
+    /* Panel body container */
     display: flex;
     width: 100%;
 }
 
 .left-panel,
 .right-panel {
+    /* Left and right panel styles */
     gap: 0px;
     display: flex;
     flex-direction: column;
@@ -234,14 +258,15 @@ body {
     padding: 5px;
 }
 
-
 /* Styling the modal */
 .modal {
+    /* Modal container */
     padding: 20px;
 }
 
 /* Modal header */
 .modal-header {
+    /* Modal header container */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -250,6 +275,7 @@ body {
 
 /* Close button */
 .modal-header .close {
+    /* Close button style */
     background: none;
     border: none;
     font-size: 1.2rem;
@@ -258,6 +284,7 @@ body {
 
 /* Button styles */
 button {
+    /* Common button styles */
     display: inline-block;
     padding: 10px 20px;
     font-size: 1rem;
@@ -272,14 +299,14 @@ button {
 }
 
 button:hover {
+    /* Button hover style */
     background-color: #005bb5;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-
 /* Styling the table */
 table {
+    /* Table styles */
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -287,35 +314,30 @@ table {
 
 table th,
 table td {
+    /* Table header and data cell styles */
     padding: 10px;
     text-align: left;
 }
 
 table thead th {
+    /* Table header styles */
     border-bottom: 2px solid #eee;
 }
 
 table tbody tr:nth-child(even) {
+    /* Table row styles */
     background-color: #f9f9f9;
 }
 
 /* Specific styles for radio buttons */
 input[type="radio"] {
+    /* Radio button styles */
     margin-right: 8px;
-}
-
-/* Flexbox utilities */
-.flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.flex-gap-5 {
-    gap: 5px;
 }
 
 /* Common button style */
 .btn {
+    /* Common button styles */
     padding: 8px 16px;
     border: none;
     border-radius: 8px;
@@ -325,15 +347,18 @@ input[type="radio"] {
 }
 
 .btn-red {
+    /* Red button style */
     background-color: #ff3b30;
     color: #fff;
 }
 
 .btn-blue {
+    /* Blue button style */
     background-color: #007aff;
     color: #fff;
 }
 
 .btn:hover {
+    /* Button hover style */
     opacity: 0.9;
 }
