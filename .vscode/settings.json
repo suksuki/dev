@@ -4,5 +4,6 @@
     "debug.console.fontSize": 16,
     "scm.inputFontSize": 18,
     "terminal.integrated.fontSize": 18,
-    "chat.editor.fontSize": 18
+    "chat.editor.fontSize": 18,
+    "git.ignoreLimitWarning": true
 }
