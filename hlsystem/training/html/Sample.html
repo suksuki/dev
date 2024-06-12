@@ -23,28 +23,28 @@
     <div id="app" class="flex-100">
         <main class="modal flex-100" v-if="showModal">
             <header class="modal-header">
-                Product Information Management
+                제품 정보 관리
                 <button class="btn btn-red close" @click="closeModal">
                     <i class="fa fa-times" aria-hidden="true"></i>
-                    <span class="sr-only">Close</span>
+                    <span class="sr-only">닫기</span>
                 </button>
             </header>
             <div class="panel-body">
                 <form class="left-panel flex-40 flex-gap-5" aria-labelledby="product-info">
                     <div class="form-group">
-                        <label class="fix-width-33" for="productName">Product Name:</label>
-                        <input id="productName" class="form-control" placeholder="Our Love Happy Savings" type="text">
+                        <label class="fix-width-33" for="productName">제품 이름:</label>
+                        <input id="productName" class="form-control" placeholder="우리 사랑 행복 저축" type="text">
                     </div>
                     <div class="form-group flex-gap-5">
-                        <button class="btn btn-blue flex-40" type="button">Search by Condition</button>
-                        <button class="btn btn-blue flex-40" type="button">Search All</button>
+                        <button class="btn btn-blue flex-40" type="button">조건으로 검색</button>
+                        <button class="btn btn-blue flex-40" type="button">전체 검색</button>
                     </div>
                     <table class="table" aria-label="Product List">
                         <thead>
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col">Product Name (Product Code)</th>
-                                <th scope="col">Target Audience</th>
+                                <th scope="col">제품 이름 (제품 코드)</th>
+                                <th scope="col">대상 고객</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,98 +64,98 @@
                 </form>
                 <form class="right-panel flex-60 flex-gap-5" aria-labelledby="product-details">
                     <div class="form-group">
-                        <label class="fix-width-33" for="productDetailName">*Product Name:</label>
-                        <input id="productDetailName" class="form-control" placeholder="Our Love Happy Savings" type="text"
+                        <label class="fix-width-33" for="productDetailName">*제품 이름:</label>
+                        <input id="productDetailName" class="form-control" placeholder="우리 사랑 행복 저축" type="text"
                             v-model="curItem.productDetailName">
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="productCode">*Product Code:</label>
+                        <label class="fix-width-33" for="productCode">*제품 코드:</label>
                         <input id="productCode" class="form-control" placeholder="A1200" type="text"
                             v-model="curItem.productCode">
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="productType">*Product Type:</label>
-                        <input id="productType" class="form-control" placeholder="Savings" type="text"
+                        <label class="fix-width-33" for="productType">*제품 유형:</label>
+                        <input id="productType" class="form-control" placeholder="저축" type="text"
                             v-model="curItem.productType">
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="targetAudience">*Target Audience:</label>
-                        <input id="targetAudience" class="form-control" placeholder="General Individual" type="text"
+                        <label class="fix-width-33" for="targetAudience">*대상 고객:</label>
+                        <input id="targetAudience" class="form-control" placeholder="일반 개인" type="text"
                             v-model="curItem.targetAudience">
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="membershipPeriod">*Membership Period:</label>
+                        <label class="fix-width-33" for="membershipPeriod">*회원 기간:</label>
                         <div class="form-control">
-                            <label for="minPeriod">(Minimum)</label>
+                            <label for="minPeriod">(최소)</label>
                             <input id="minPeriod" type="number" value="6" v-model="curItem.minPeriod">
-                            <label for="maxPeriod">months ~(Maximum)</label>
+                            <label for="maxPeriod">개월 ~(최대)</label>
                             <input id="maxPeriod" type="number" value="12" v-model="curItem.maxPeriod">
-                            <label for="maxPeriod">months</label>
+                            <label for="maxPeriod">개월</label>
 
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="targetAmount">*Target Amount:</label>
+                        <label class="fix-width-33" for="targetAmount">*대상 금액:</label>
                         <div class="form-control">
                             <input id="minAmount" type="number" value="1" v-model="curItem.minAmount">
-                            <label for="maxAmount">From 10,000 won</label>
+                            <label for="maxAmount">10,000원 이상</label>
                             <input id="maxAmount" type="number" value="100" v-model="curItem.maxAmount">
-                            <label for="maxAmount">Up to 1,000,000 won</label>
+                            <label for="maxAmount">1,000,000원 이하</label>
 
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="paymentFrequency">Payment Frequency:</label>
-                        <input id="paymentFrequency" class="form-control" placeholder="Monthly Payment" type="text"
+                        <label class="fix-width-33" for="paymentFrequency">납부 주기:</label>
+                        <input id="paymentFrequency" class="form-control" placeholder="월 납부" type="text"
                             v-model="curItem.paymentFrequency">
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="interestRate">*Interest Rate:</label>
+                        <label class="fix-width-33" for="interestRate">*이자율:</label>
                         <div class="form-control">
-                            <label for="minRate">(Minimum)</label>
+                            <label for="minRate">(최소)</label>
                             <input id="minRate" type="number" value="3.00" step="0.01" v-model="curItem.minRate">
-                            <label for="maxRate">% ~(Maximum)</label>
+                            <label for="maxRate">%(최대)</label>
                             <input id="maxRate" type="number" value="7.00" step="0.01" v-model="curItem.maxRate">
                             <label for="maxRate">%</label>
 
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="applicationPeriod">*Application Period:</label>
+                        <label class="fix-width-33" for="applicationPeriod">*신청 기간:</label>
                         <div class="form-control">
                             <input id="startDate" type="date" value="2024-01-12" v-model="curItem.startDate">
-                            <label>From</label>
+                            <label>부터</label>
                             <input id="endDate" type="date" value="2024-01-12" v-model="curItem.endDate">
-                            <label>To</label>
+                            <label>까지</label>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="taxType">*Tax Type:</label>
-                        <input id="taxType" class="form-control" placeholder="General Taxation" type="text"
+                        <label class="fix-width-33" for="taxType">*과세 유형:</label>
+                        <input id="taxType" class="form-control" placeholder="일반 과세" type="text"
                             v-model="curItem.taxType">
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="salesStatus">*Sales Status:</label>
-                        <input id="salesStatus" class="form-control" placeholder="0. Normal (Sales) 1. Sales Preparation 2. Sales Approval 9. Sales Suspension"
+                        <label class="fix-width-33" for="salesStatus">*판매 상태:</label>
+                        <input id="salesStatus" class="form-control" placeholder="0. 정상 (판매) 1. 판매 준비 2. 판매 승인 9. 판매 중지"
                             type="text" v-model="curItem.salesStatus">
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="salesPeriod">*Sales Period:</label>
+                        <label class="fix-width-33" for="salesPeriod">*판매 기간:</label>
                         <div class="form-control">
                             <input id="salesStartDate" type="date" value="2024-01-12" v-model="curItem.salesStartDate">
-                            <label>From</label>
+                            <label>부터</label>
 
                             <input id="salesEndDate" type="date" value="2024-01-12" v-model="curItem.salesEndDate">
-                            <label>To</label>
+                            <label>까지</label>
 
                         </div>
                     </div>
                     <div class="form-group flex-gap-5">
-                        <button class="btn btn-blue flex-40" type="button" @click="addItem">Add</button>
-                        <button class="btn btn-blue flex-40" type="button" @click="updateItem">Update</button>
-                        <button class="btn btn-blue flex-40" type="button" @click="deleteItem">Delete</button>
-                        <button class="btn btn-blue flex-40" type="button" @click="clearItem">Clear</button>
-                        <button class="btn btn-blue flex-100" type="button">Close</button>
+                        <button class="btn btn-blue flex-40" type="button" @click="addItem">추가</button>
+                        <button class="btn btn-blue flex-40" type="button" @click="updateItem">수정</button>
+                        <button class="btn btn-blue flex-40" type="button" @click="deleteItem">삭제</button>
+                        <button class="btn btn-blue flex-40" type="button" @click="clearItem">지우기</button>
+                        <button class="btn btn-blue flex-100" type="button">닫기</button>
                     </div>
 
                 </form>
@@ -203,7 +203,8 @@
             mounted() {
                 // Vue initialization code goes here
                 // Generate fake data
-                for (let i = 0; i < 100; i++) {
+                faker.locale = "ko";
+                for (let i = 0; i < 10; i++) {
                     this.items.push({
                         id: i + 1,
                         productName: faker.commerce.productName(),
