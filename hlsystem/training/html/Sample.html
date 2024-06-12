@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Reset CSS -->
+</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Reset CSS -->
     <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet">
     <!-- Google Noto Sans Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +20,7 @@
     <link rel="stylesheet" href="css/portfolio.css" />
     <script src="https://cdn.jsdelivr.net/npm/faker/build/build/faker.js"></script> <!-- Add this line -->
 
-    <title>Sample For CSS</title>
+    <title>Sample Formple For CSS</title>
 </head>
 
 <body>
@@ -26,25 +30,25 @@
                 제품 정보 관리
                 <button class="btn btn-red close" @click="closeModal">
                     <i class="fa fa-times" aria-hidden="true"></i>
-                    <span class="sr-only">닫기</span>
+                    <span class="sr-only">Closeose</span>
                 </button>
             </header>
             <div class="panel-body">
                 <form class="left-panel flex-40 flex-gap-5" aria-labelledby="product-info">
                     <div class="form-group">
-                        <label class="fix-width-33" for="productName">제품 이름:</label>
-                        <input id="productName" class="form-control" placeholder="우리 사랑 행복 저축" type="text">
+                        <label class="fix-width-33" for="productName">Product Nameduct Name:</label>
+                        <input id="productName" class="form-control" placeholder="Our Love Happy Savingsppy Savings" type="text">
                     </div>
                     <div class="form-group flex-gap-5">
-                        <button class="btn btn-blue flex-40" type="button">조건으로 검색</button>
-                        <button class="btn btn-blue flex-40" type="button">전체 검색</button>
+                        <button class="btn btn-blue flex-40" type="button">Search by Conditionby Condition</button>
+                        <button class="btn btn-blue flex-40" type="button">Search Allh All</button>
                     </div>
-                    <table class="table" aria-label="Product List">
+                    <table class="table" aria-label="Product Listct List">
                         <thead>
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col">제품 이름 (제품 코드)</th>
-                                <th scope="col">대상 고객</th>
+                                <th scope="col">Product Name (Product Codeme (Product Code)</th>
+                                <th scope="col">Target Audiencet Audience</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,86 +68,86 @@
                 </form>
                 <form class="right-panel flex-60 flex-gap-5" aria-labelledby="product-details">
                     <div class="form-group">
-                        <label class="fix-width-33" for="productDetailName">*제품 이름:</label>
-                        <input id="productDetailName" class="form-control" placeholder="우리 사랑 행복 저축" type="text"
+                        <label class="fix-width-33" for="productDetailName">*Product Nameduct Name:</label>
+                        <input id="productDetailName" class="form-control" placeholder="Our Love Happy Savingsppy Savings" type="text"
                             v-model="curItem.productDetailName">
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="productCode">*제품 코드:</label>
+                        <label class="fix-width-33" for="productCode">*Product Codect Code:</label>
                         <input id="productCode" class="form-control" placeholder="A1200" type="text"
                             v-model="curItem.productCode">
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="productType">*제품 유형:</label>
-                        <input id="productType" class="form-control" placeholder="저축" type="text"
+                        <label class="fix-width-33" for="productType">*Product Typect Type:</label>
+                        <input id="productType" class="form-control" placeholder="Savingsvings" type="text"
                             v-model="curItem.productType">
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="targetAudience">*대상 고객:</label>
-                        <input id="targetAudience" class="form-control" placeholder="일반 개인" type="text"
+                        <label class="fix-width-33" for="targetAudience">*Target Audiencet Audience:</label>
+                        <input id="targetAudience" class="form-control" placeholder="General Individualal Individual" type="text"
                             v-model="curItem.targetAudience">
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="membershipPeriod">*회원 기간:</label>
+                        <label class="fix-width-33" for="membershipPeriod">*Membership Periodrship Period:</label>
                         <div class="form-control">
-                            <label for="minPeriod">(최소)</label>
+                            <label for="minPeriod">(Minimumnimum)</label>
                             <input id="minPeriod" type="number" value="6" v-model="curItem.minPeriod">
-                            <label for="maxPeriod">개월 ~(최대)</label>
+                            <label for="maxPeriod">monthsnthMaximum~(Maximum)</label>
                             <input id="maxPeriod" type="number" value="12" v-model="curItem.maxPeriod">
-                            <label for="maxPeriod">개월</label>
+                            <label for="maxPeriod">monthsnths</label>
 
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="targetAmount">*대상 금액:</label>
+                        <label class="fix-width-33" for="targetAmount">*Target Amountt Amount:</label>
                         <div class="form-control">
                             <input id="minAmount" type="number" value="1" v-model="curItem.minAmount">
-                            <label for="maxAmount">10,000원 이상</label>
+                            <label for="maxAmount">From From 1 won0 won</label>
                             <input id="maxAmount" type="number" value="100" v-model="curItem.maxAmount">
-                            <label for="maxAmount">1,000,000원 이하</label>
+                            <label for="maxAmount">Up to Up to 1,0 won00 won</label>
 
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="paymentFrequency">납부 주기:</label>
-                        <input id="paymentFrequency" class="form-control" placeholder="월 납부" type="text"
+                        <label class="fix-width-33" for="paymentFrequency">Payment Frequencynt Frequency:</label>
+                        <input id="paymentFrequency" class="form-control" placeholder="Monthly Paymenthly Payment" type="text"
                             v-model="curItem.paymentFrequency">
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="interestRate">*이자율:</label>
+                        <label class="fix-width-33" for="interestRate">*Interest Rateerest Rate:</label>
                         <div class="form-control">
-                            <label for="minRate">(최소)</label>
+                            <label for="minRate">(Minimumnimum)</label>
                             <input id="minRate" type="number" value="3.00" step="0.01" v-model="curItem.minRate">
-                            <label for="maxRate">%(최대)</label>
+                            <label for="maxRate">% ~(Maximumximum)</label>
                             <input id="maxRate" type="number" value="7.00" step="0.01" v-model="curItem.maxRate">
                             <label for="maxRate">%</label>
 
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="applicationPeriod">*신청 기간:</label>
+                        <label class="fix-width-33" for="applicationPeriod">*Application Periodcation Period:</label>
                         <div class="form-control">
                             <input id="startDate" type="date" value="2024-01-12" v-model="curItem.startDate">
-                            <label>부터</label>
+                            <label>Fromom</label>
                             <input id="endDate" type="date" value="2024-01-12" v-model="curItem.endDate">
                             <label>까지</label>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="taxType">*과세 유형:</label>
-                        <input id="taxType" class="form-control" placeholder="일반 과세" type="text"
+                        <label class="fix-width-33" for="taxType">*Tax Typeype:</label>
+                        <input id="taxType" class="form-control" placeholder="General Taxational Taxation" type="text"
                             v-model="curItem.taxType">
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="salesStatus">*판매 상태:</label>
-                        <input id="salesStatus" class="form-control" placeholder="0. 정상 (판매) 1. 판매 준비 2. 판매 승인 9. 판매 중지"
+                        <label class="fix-width-33" for="salesStatus">*Sales Status Status:</label>
+                        <input id="salesStatus" class="form-control" placeholder="0. Normal (Sales (SalSales Preparation. SaSales ApprovalrepaSales Suspensionn 2. Sales Approval 9. Sales Suspension"
                             type="text" v-model="curItem.salesStatus">
                     </div>
                     <div class="form-group">
-                        <label class="fix-width-33" for="salesPeriod">*판매 기간:</label>
+                        <label class="fix-width-33" for="salesPeriod">*Sales Period Period:</label>
                         <div class="form-control">
                             <input id="salesStartDate" type="date" value="2024-01-12" v-model="curItem.salesStartDate">
-                            <label>부터</label>
+                            <label>Fromom</label>
 
                             <input id="salesEndDate" type="date" value="2024-01-12" v-model="curItem.salesEndDate">
                             <label>까지</label>
@@ -151,11 +155,11 @@
                         </div>
                     </div>
                     <div class="form-group flex-gap-5">
-                        <button class="btn btn-blue flex-40" type="button" @click="addItem">추가</button>
-                        <button class="btn btn-blue flex-40" type="button" @click="updateItem">수정</button>
-                        <button class="btn btn-blue flex-40" type="button" @click="deleteItem">삭제</button>
-                        <button class="btn btn-blue flex-40" type="button" @click="clearItem">지우기</button>
-                        <button class="btn btn-blue flex-100" type="button">닫기</button>
+                        <button class="btn btn-blue flex-40" type="button" @click="addItem">Addd</button>
+                        <button class="btn btn-blue flex-40" type="button" @click="updateItem">Updatedate</button>
+                        <button class="btn btn-blue flex-40" type="button" @click="deleteItem">Deletelete</button>
+                        <button class="btn btn-blue flex-40" type="button" @click="clearItem">Clearar</button>
+                        <button class="btn btn-blue flex-100" type="button">Closeose</button>
                     </div>
 
                 </form>
@@ -164,6 +168,7 @@
     </div>
 
     <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/faker/build/build/faker.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
 
@@ -183,21 +188,21 @@
                 },
                 addItem() {
                     this.items.push(this.curItem);
-                    console.log('Add Item');
+                    console.log('Add Itemtem');
                 },
                 updateItem() {
-                    console.log('Update Item');
+                    console.log('Update Iteme Item');
                 },
                 deleteItem() {
                     const index = this.items.findIndex(item => item.id === this.curItem.id);
                     if (index !== -1) {
                         this.items.splice(index, 1);
-                        console.log('Delete Item');
+                        console.log('Delete Iteme Item');
                     }
                 },
                 clearItem() {
                     this.curItem = {};
-                    console.log('Clear Item');
+                    console.log('Clear ItemItem');
                 }
             },
             mounted() {

@@ -1,1 +1,244 @@
-            import faker from 'faker';
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Reset CSS -->
+</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Reset CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet">
+    <!-- Google Noto Sans Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <!-- Common Styles -->
+    <link rel="stylesheet" href="css/portfolio.css" />
+    <script src="https://cdn.jsdelivr.net/npm/faker/build/build/faker.js"></script> <!-- Add this line -->
+
+    <title>Sample Formple For CSS</title>
+</head>
+
+<body>
+    <div id="app" class="flex-100">
+        <main class="modal flex-100" v-if="showModal">
+            <header class="modal-header">
+                Product Information Management
+                <button class="btn btn-red close" @click="closeModal">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <span class="sr-only">Closeose</span>
+                </button>
+            </header>
+            <div class="panel-body">
+                <form class="left-panel flex-40 flex-gap-5" aria-labelledby="product-info">
+                    <div class="form-group">
+                        <label class="fix-width-33" for="productName">Product Nameduct Name:</label>
+                        <input id="productName" class="form-control" placeholder="Our Love Happy Savingsppy Savings" type="text">
+                    </div>
+                    <div class="form-group flex-gap-5">
+                        <button class="btn btn-blue flex-40" type="button">Search by Conditionby Condition</button>
+                        <button class="btn btn-blue flex-40" type="button">Search Allh All</button>
+                    </div>
+                    <table class="table" aria-label="Product Listct List">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Product Name (Product Codeme (Product Code)</th>
+                                <th scope="col">Target Audiencet Audience</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="item in items" :key="item.id">
+                                <td>
+                                    <label class="form-control flex-center">
+                                        <input type="radio" name="radio-group" @click="changeItem(item)">
+                                        <div class="radio-circle"></div>
+                                    </label>
+                                </td>
+                                <td>{{ item.productName }}</td>
+                                <td>{{ item.targetAudience }}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </form>
+                <form class="right-panel flex-60 flex-gap-5" aria-labelledby="product-details">
+                    <div class="form-group">
+                        <label class="fix-width-33" for="productDetailName">*Product Nameduct Name:</label>
+                        <input id="productDetailName" class="form-control" placeholder="Our Love Happy Savingsppy Savings" type="text"
+                            v-model="curItem.productDetailName">
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="productCode">*Product Codect Code:</label>
+                        <input id="productCode" class="form-control" placeholder="A1200" type="text"
+                            v-model="curItem.productCode">
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="productType">*Product Typect Type:</label>
+                        <input id="productType" class="form-control" placeholder="Savingsvings" type="text"
+                            v-model="curItem.productType">
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="targetAudience">*Target Audiencet Audience:</label>
+                        <input id="targetAudience" class="form-control" placeholder="General Individualal Individual" type="text"
+                            v-model="curItem.targetAudience">
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="membershipPeriod">*Membership Periodrship Period:</label>
+                        <div class="form-control">
+                            <label for="minPeriod">(Minimumnimum)</label>
+                            <input id="minPeriod" type="number" value="6" v-model="curItem.minPeriod">
+                            <label for="maxPeriod">monthsnthMaximum~(Maximum)</label>
+                            <input id="maxPeriod" type="number" value="12" v-model="curItem.maxPeriod">
+                            <label for="maxPeriod">monthsnths</label>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="targetAmount">*Target Amountt Amount:</label>
+                        <div class="form-control">
+                            <input id="minAmount" type="number" value="1" v-model="curItem.minAmount">
+                            <label for="maxAmount">From From 1 won0 won</label>
+                            <input id="maxAmount" type="number" value="100" v-model="curItem.maxAmount">
+                            <label for="maxAmount">Up to Up to 1,0 won00 won</label>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="paymentFrequency">Payment Frequencynt Frequency:</label>
+                        <input id="paymentFrequency" class="form-control" placeholder="Monthly Paymenthly Payment" type="text"
+                            v-model="curItem.paymentFrequency">
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="interestRate">*Interest Rateerest Rate:</label>
+                        <div class="form-control">
+                            <label for="minRate">(Minimumnimum)</label>
+                            <input id="minRate" type="number" value="3.00" step="0.01" v-model="curItem.minRate">
+                            <label for="maxRate">% ~(Maximumximum)</label>
+                            <input id="maxRate" type="number" value="7.00" step="0.01" v-model="curItem.maxRate">
+                            <label for="maxRate">%</label>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="applicationPeriod">*Application Periodcation Period:</label>
+                        <div class="form-control">
+                            <input id="startDate" type="date" value="2024-01-12" v-model="curItem.startDate">
+                            <label>Fromom</label>
+                            <input id="endDate" type="date" value="2024-01-12" v-model="curItem.endDate">
+                            <label>To</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="taxType">*Tax Typeype:</label>
+                        <input id="taxType" class="form-control" placeholder="General Taxational Taxation" type="text"
+                            v-model="curItem.taxType">
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="salesStatus">*Sales Status Status:</label>
+                        <input id="salesStatus" class="form-control" placeholder="0. Normal (Sales (SalSales Preparation. SaSales ApprovalrepaSales Suspensionn 2. Sales Approval 9. Sales Suspension"
+                            type="text" v-model="curItem.salesStatus">
+                    </div>
+                    <div class="form-group">
+                        <label class="fix-width-33" for="salesPeriod">*Sales Period Period:</label>
+                        <div class="form-control">
+                            <input id="salesStartDate" type="date" value="2024-01-12" v-model="curItem.salesStartDate">
+                            <label>Fromom</label>
+
+                            <input id="salesEndDate" type="date" value="2024-01-12" v-model="curItem.salesEndDate">
+                            <label>To</label>
+
+                        </div>
+                    </div>
+                    <div class="form-group flex-gap-5">
+                        <button class="btn btn-blue flex-40" type="button" @click="addItem">Addd</button>
+                        <button class="btn btn-blue flex-40" type="button" @click="updateItem">Updatedate</button>
+                        <button class="btn btn-blue flex-40" type="button" @click="deleteItem">Deletelete</button>
+                        <button class="btn btn-blue flex-40" type="button" @click="clearItem">Clearar</button>
+                        <button class="btn btn-blue flex-100" type="button">Closeose</button>
+                    </div>
+
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/faker/build/build/faker.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                showModal: true,
+                items: [],
+                curItem: {},
+            },
+            methods: {
+                closeModal() {
+                    this.showModal = false;
+                },
+                changeItem(item) {
+                    this.curItem = item;
+                },
+                addItem() {
+                    this.items.push(this.curItem);
+                    console.log('Add Itemtem');
+                },
+                updateItem() {
+                    console.log('Update Iteme Item');
+                },
+                deleteItem() {
+                    const index = this.items.findIndex(item => item.id === this.curItem.id);
+                    if (index !== -1) {
+                        this.items.splice(index, 1);
+                        console.log('Delete Iteme Item');
+                    }
+                },
+                clearItem() {
+                    this.curItem = {};
+                    console.log('Clear ItemItem');
+                }
+            },
+            mounted() {
+                // Vue initialization code goes here
+                // Generate fake data
+                for (let i = 0; i < 100; i++) {
+                    this.items.push({
+                        id: i + 1,
+                        productName: faker.commerce.productName(),
+                        targetAudience: faker.random.word(),
+                        productDetailName: faker.commerce.product(),
+                        productCode: faker.random.alphaNumeric(6),
+                        productType: faker.random.word(),
+                        targetAudience: faker.random.word(),
+                        minPeriod: faker.random.number({ min: 1, max: 10 }),
+                        maxPeriod: faker.random.number({ min: 1, max: 10 }),
+                        minAmount: faker.random.number({ min: 1, max: 100 }),
+                        maxAmount: faker.random.number({ min: 1, max: 100 }),
+                        paymentFrequency: faker.random.word(),
+                        minRate: faker.random.number({ min: 3, max: 7, precision: 0.01 }),
+                        maxRate: faker.random.number({ min: 3, max: 7, precision: 0.01 }),
+                        startDate: faker.date.future().toISOString().split('T')[0],
+                        endDate: faker.date.future().toISOString().split('T')[0],
+                        taxType: faker.random.word(),
+                        salesStatus: faker.random.word(),
+                        salesStartDate: faker.date.future().toISOString().split('T')[0],
+                        salesEndDate: faker.date.future().toISOString().split('T')[0],
+                    });
+                    this.curItem = this.items[0];
+                }
+
+            },
+
+        },)
+
+    </script>
+</body>
+
+</html>
