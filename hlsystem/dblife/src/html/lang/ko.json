@@ -1,0 +1,21 @@
+{
+    "home": "홈",
+    "services": "서비스",
+    "about_us": "회사 소개",
+    "contact": "연락처",
+    "blog": "블로그",
+    "welcome_message": "우리의 데이터베이스 서비스 회사에 오신 것을 환영합니다",
+    "intro_message": "모든 규모의 비즈니스를 위한 최고급 데이터베이스 솔루션을 제공합니다.",
+    "our_services": "우리의 서비스",
+    "services_intro": "비즈니스 요구에 맞는 다양한 데이터베이스 서비스를 제공합니다.",
+    "service_management": "데이터베이스 관리",
+    "service_optimization": "데이터베이스 최적화",
+    "service_migration": "데이터 마이그레이션",
+    "about_intro": "우리는 전 세계 비즈니스에 최고의 데이터베이스 솔루션을 제공하는 데 전념하는 데이터베이스 전문가 팀입니다.",
+    "contact_intro": "아래 양식을 통해 저희에게 연락하시거나 저희 사무실을 방문하십시오.",
+    "name_label": "이름:",
+    "email_label": "이메일:",
+    "message_label": "메시지:",
+    "send_button": "보내기",
+    "blog_intro": "우리의 블로그에 오신 것을 환영합니다. 여기서 데이터베이스 관리, 최적화 등에 대한 최신 뉴스와 기사를 찾을 수 있습니다."
+}

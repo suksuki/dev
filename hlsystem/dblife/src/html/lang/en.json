@@ -1,0 +1,21 @@
+{
+    "home": "Home",
+    "services": "Services",
+    "about_us": "About Us",
+    "contact": "Contact",
+    "blog": "Blog",
+    "welcome_message": "Welcome to Our Database Services Company",
+    "intro_message": "Providing top-notch database solutions for businesses of all sizes.",
+    "our_services": "Our Services",
+    "services_intro": "We offer a wide range of database services to meet your business needs.",
+    "service_management": "Database Management",
+    "service_optimization": "Database Optimization",
+    "service_migration": "Data Migration",
+    "about_intro": "We are a dedicated team of database experts committed to providing the best database solutions for businesses worldwide.",
+    "contact_intro": "Get in touch with us through the form below or visit our office.",
+    "name_label": "Name:",
+    "email_label": "Email:",
+    "message_label": "Message:",
+    "send_button": "Send",
+    "blog_intro": "Welcome to our blog. Here you will find the latest news and articles about database management, optimization, and more."
+}
